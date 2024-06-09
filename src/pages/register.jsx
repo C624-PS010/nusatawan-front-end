@@ -1,5 +1,5 @@
-import AuthLayout from '../components/Layouts/AuthLayouts'
-import FormRegister from "../components/Fragments/FormRegister";
+import AuthLayout from '../components/Input/AuthLayout'
+import FormRegister from '../components/Input/FormRegister'
 
 const RegisterPage = () => {
     return (
