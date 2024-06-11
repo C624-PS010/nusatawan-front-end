@@ -25,7 +25,7 @@ const NavigationForm = ({ type }) => {
         return (
             <p className='text-sm mt-5 text-center'>
                 Belum punya akun?{" "}
-                <Link to="/register" className='font-bold text-secondary'>
+                <Link to="/register" className='font-bold text-primary'>
                     Ayo Daftar 
                 </Link>
             </p>
@@ -34,7 +34,7 @@ const NavigationForm = ({ type }) => {
         return (
             <p className='text-sm mt-5 text-center'>
             Sudah punya akun?{" "}
-            <Link to="/login" className='font-bold text-secondary'>
+            <Link to="/login" className='font-bold text-primary'>
                 Masuk Sekarang
             </Link>
         </p>
