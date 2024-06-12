@@ -2,10 +2,12 @@ import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { NavbarLinks } from "./Navbar";
 import Button from "../Button";
+import { useGlobalState } from "../../context/GlobalStateContext";
 
 // eslint-disable-next-line react/prop-types
-const ResponsiveMenu = ({ showMenu, setShowMenu }) => {
-  console.log("showMenu", showMenu);
+const ResponsiveMenu = ({ showMenu, setShowMenu, logoutHandler }) => {
+  const { userProfile, isLoggedIn } = useGlobalState();
+
   return (
     <div
       className={`${
@@ -16,8 +18,8 @@ const ResponsiveMenu = ({ showMenu, setShowMenu }) => {
         <div className="flex items-center justify-start gap-3">
           <FaUserCircle size={50} />
           <div>
-            <h1 className="font-semibold">Hello Lorem</h1>
-            <h1 className="text-sm text-slate-500">Lorem Ipsum</h1>
+            <h1 className="font-semibold">Hello {userProfile ? userProfile.username : "There"}!</h1>
+            <h1 className="text-sm text-slate-500">{isLoggedIn ? "Logged in" : "Guest user"}</h1>
           </div>
         </div>
         <nav className="mt-12">
@@ -27,20 +29,29 @@ const ResponsiveMenu = ({ showMenu, setShowMenu }) => {
                 <Link
                   to={data.link}
                   onClick={() => setShowMenu(false)}
-                  className="mb-5 inline-block">
+                  className="mb-5 inline-block"
+                >
                   {data.name}
                 </Link>
               </li>
             ))}
-            {/* Button Keluar */}
-            <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">
-                Keluar
-            </Button>
 
-            {/* Button Login */}
-            <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">
-                Masuk
-            </Button>
+            {/* To login */}
+            {!isLoggedIn && (
+              <Link to="auth/login">
+                <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">Login</Button>
+              </Link>
+            )}
+
+            {/* Logout button */}
+            {isLoggedIn && (
+              <Button
+                classname="bg-primary hover:bg-tertiary rounded-full w-full"
+                onClick={logoutHandler}
+              >
+                Keluar
+              </Button>
+            )}
           </ul>
         </nav>
       </div>
