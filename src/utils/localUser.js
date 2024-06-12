@@ -8,6 +8,7 @@ const localUser = {
   },
   remove: () => {
     localStorage.removeItem("user");
+    window.dispatchEvent(new Event("localUser"));
   },
 };
 

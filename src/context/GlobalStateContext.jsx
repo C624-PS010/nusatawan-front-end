@@ -8,12 +8,6 @@ export const GlobalStateProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!userProfile);
 
   useEffect(() => {
-    const storedUserProfile = JSON.parse(localStorage.getItem("userProfile"));
-    if (storedUserProfile) {
-      setUserProfile(storedUserProfile);
-      setIsLoggedIn(true);
-    }
-
     const handleStorageChange = () => {
       const updatedUserProfile = localUser.get();
       if (updatedUserProfile) {
@@ -21,6 +15,8 @@ export const GlobalStateProvider = ({ children }) => {
         setIsLoggedIn(true);
       }
     };
+
+    handleStorageChange();
 
     window.addEventListener("localUser", handleStorageChange);
 

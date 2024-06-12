@@ -55,7 +55,7 @@ const Navbar = () => {
   };
 
   const logoutHandler = () => {
-    localUser.remove;
+    localUser.remove();
     navigate("/auth/login");
   };
 
