@@ -34,9 +34,12 @@ const FormLogin = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+
       setError(true);
       setSuccess(false);
-      setMessage(error.message || "An error occurred during login.");
+
+      if (error.data) setMessage(error.data.message);
+      else setMessage(error.message);
     }
   };
 
