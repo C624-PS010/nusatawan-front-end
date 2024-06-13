@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import convertDate from "../../utils/dateConverter";
+import config from "../../utils/config";
 
 // eslint-disable-next-line react/prop-types
 const Campaign = ({ id, title, image, content, createdAt, user }) => {
@@ -13,7 +14,7 @@ const Campaign = ({ id, title, image, content, createdAt, user }) => {
       <div className="shadow-lg max-w-sm rounded-2xl">
         <img
           className="w-full h-52 rounded-t-2xl shadow-lg"
-          src={`http://103.150.92.104:2024/images/campaigns/${image}`}
+          src={`${config.baseUrl}/images/campaigns/${image}`}
           alt="Gambar kampanye"
         />
         <div className="p-4 pb-5 text-center">

@@ -4,6 +4,7 @@ import Button from "../components/Button/index";
 import Rating from "../components/Rating/Rating";
 import Articles from "../network/Articles";
 import convertDate from "../utils/dateConverter";
+import config from "../utils/config";
 
 const ArtikelDetails = () => {
   const { id } = useParams();
@@ -34,7 +35,7 @@ const ArtikelDetails = () => {
     <div className="p-5">
       <div className="h-[300px] overflow-hidden">
         <img
-          src={`http://103.150.92.104:2024/images/articles/${articleData.image}`}
+          src={`${config.baseUrl}/images/articles/${articleData.image}`}
           alt={`Gambar artikel ${articleData.title}`}
           className="mx-auto h-[300px] w-full object-cover transition duration-700 hover:scale-110"
         />

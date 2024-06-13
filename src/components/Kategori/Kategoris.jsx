@@ -1,36 +1,16 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import config from "../../utils/config";
 
 const kategoris = [
-  {
-    name: "Ekowisata",
-    image: "https://nusatawan-api-test.vercel.app/images/categories/ekowisata",
-  },
-  {
-    name: "Gunung",
-    image: "https://nusatawan-api-test.vercel.app/images/categories/gunung",
-  },
-  {
-    name: "laut",
-    image: "https://nusatawan-api-test.vercel.app/images/categories/laut",
-  },
-  {
-    name: "Pantai",
-    image: "https://nusatawan-api-test.vercel.app/images/categories/pantai",
-  },
-  {
-    name: "Religi",
-    image: "https://nusatawan-api-test.vercel.app/images/categories/religi",
-  },
-  {
-    name: "Sejarah",
-    image: "https://nusatawan-api-test.vercel.app/images/categories/sejarah",
-  },
-  {
-    name: "Seni",
-    image: "https://nusatawan-api-test.vercel.app/images/categories/seni",
-  },
+  { name: "Ekowisata" },
+  { name: "Gunung" },
+  { name: "laut" },
+  { name: "Pantai" },
+  { name: "Religi" },
+  { name: "Sejarah" },
+  { name: "Seni" },
 ];
 
 const CardKategori = () => {
@@ -78,7 +58,7 @@ const CardKategori = () => {
           >
             <a href="#">
               <img
-                src={kategori.image}
+                src={`${config.baseUrl}/images/categories/${kategori.name.toLowerCase()}`}
                 alt="contoh"
                 className="transition-transform group-hover:scale-110 duration-200"
               />

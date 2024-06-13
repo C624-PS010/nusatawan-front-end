@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Campaigns from "../network/Campaign";
 import convertDate from "../utils/dateConverter";
+import config from "../utils/config";
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -32,7 +33,7 @@ const CampaignDetails = () => {
     <div className="p-5">
       <div className="h-[300px] overflow-hidden">
         <img
-          src={`http://103.150.92.104:2024/images/articles/${campaignData.image}`}
+          src={`${config.baseUrl}/images/articles/${campaignData.image}`}
           alt={`Gambar kampanye ${campaignData.title}`}
           className="mx-auto h-[300px] w-full object-cover transition duration-700 hover:scale-110"
         />
