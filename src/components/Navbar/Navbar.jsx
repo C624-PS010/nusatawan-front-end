@@ -113,39 +113,43 @@ const Navbar = () => {
               )}
 
               {/* Button User Logout */}
-              <div className="hidden md:block">
-                <div className="py-4 relative group cursor-pointer">
-                  <div className="dropdown flex items-center">
-                    <span style={{ color: "#FFAA19" }}>
-                      <FaUserCircle
-                        size={50}
-                        className="transition-all duration-200 group-hover:rotate-180"
-                      ></FaUserCircle>
-                    </span>
-                  </div>
+              {/* kondisi ketika user login */}
+              {isLoggedIn && (
+                <div className="hidden md:block">
+                  <div className="py-4 relative group cursor-pointer">
+                    <div className="dropdown flex items-center">
+                      <span style={{ color: "#FFAA19" }}>
+                        <FaUserCircle
+                          size={50}
+                          className="transition-all duration-200 group-hover:rotate-180"
+                        ></FaUserCircle>
+                      </span>
+                    </div>
 
-                  {/* Dropdown User Keluar*/}
-                  <div className="absolute -left-9 z-[9999] hidden w-[150px] rounded-md bg-white p-2 text-black group-hover:block shadow-md">
-                    <ul>
-                      <li className="font-semibold p-2">
-                        <h1>
-                          Hello {userProfile ? userProfile.username : "there"}!
-                        </h1>
-                      </li>
-                      <li>
-                        {isLoggedIn && (
-                          <button
-                            className="inline-block w-full text-left rounded-md p-2 hover:bg-primary/10"
-                            onClick={logoutHandler}
-                          >
-                            Keluar
-                          </button>
-                        )}
-                      </li>
-                    </ul>
+                    {/* Dropdown User Keluar*/}
+                    <div className="absolute -left-9 z-[9999] hidden w-[150px] rounded-md bg-white p-2 text-black group-hover:block shadow-md">
+                      <ul>
+                        <li className="font-semibold p-2">
+                          <h1>
+                            Hello {userProfile ? userProfile.username : "there"}
+                            !
+                          </h1>
+                        </li>
+                        <li>
+                          {isLoggedIn && (
+                            <button
+                              className="inline-block w-full text-left rounded-md p-2 hover:bg-primary/10"
+                              onClick={logoutHandler}
+                            >
+                              Keluar
+                            </button>
+                          )}
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Hamburger */}
               <div className="md:hidden block">
