@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import CampaignCard from "./CampaignCard";
-import Campaigns from "../../network/Campaign";
+import Campaigns from "../../network/Campaigns";
 
 const CampaignDetail = () => {
   const [campaignsData, setCampaignsData] = useState([]);
