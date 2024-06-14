@@ -1,19 +1,6 @@
 import react, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-// import AppLayout from "./pages/Layouts/AppLayout";
-// import AuthLayout from "./pages/Layouts/AuthLayout";
-// import Home from "./pages/home";
-// import LoginPage from "./pages/login";
-// import RegisterPage from "./pages/register";
-// import ArtikelsPage from "./pages/artikel";
-// import ArtikelDetails from "./pages/artikelDetails";
-// import CampaignPage from "./pages/campaign";
-// import CampaignDetails from "./pages/campaignDetails";
-// import TentangPage from "./pages/tentang";
-// import ErrorPage from "./pages/404";
-// import Auth from "./components/Auth";
-
 const AppLayout = lazy(() => import("./pages/Layouts/AppLayout"));
 const AuthLayout = lazy(() => import("./pages/Layouts/AuthLayout"));
 const Home = lazy(() => import("./pages/home"));
@@ -28,14 +15,14 @@ const ErrorPage = lazy(() => import("./pages/404"));
 const Auth = lazy(() => import("./components/Auth"));
 
 // Dashboard
-import DashboardLayout from "./pages/Layouts/DashboardLayout";
-import MainDashboard from "./dashboard/Main/Main";
-import TableArtikel from "./dashboard/Artikel";
-import ViewArtikel from "./dashboard/Artikel/view";
-import CreateArtikel from "./dashboard/Artikel/create";
-import TableCampaign from "./dashboard/Campaign";
-import CreateCampaign from "./dashboard/Campaign/create";
-import ViewCampaign from "./dashboard/Campaign/view";
+const DashboardLayout = lazy(() => import("./pages/Layouts/DashboardLayout"));
+const MainDashboard = lazy(() => import("./dashboard/Main/Main"));
+const TableArtikel = lazy(() => import("./dashboard/Artikel"));
+const ViewArtikel = lazy(() => import("./dashboard/Artikel/view"));
+const CreateArtikel = lazy(() => import("./dashboard/Artikel/create"));
+const TableCampaign = lazy(() => import("./dashboard/Campaign"));
+const CreateCampaign = lazy(() => import("./dashboard/Campaign/create"));
+const ViewCampaign = lazy(() => import("./dashboard/Campaign/view"));
 
 const App = () => {
   return (
