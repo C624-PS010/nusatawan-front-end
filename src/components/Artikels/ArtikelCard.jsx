@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import convertDate from "../../utils/dateConverter";
 import config from "../../utils/config";
 
-// eslint-disable-next-line react/prop-types
 const ArtikelCard = ({ id, title, content, image, createdAt, user }) => {
+  const renderContent = (content) => {
+    return content
+      .replace(/\[b\](.*?)\[\/b\]/g, "<strong>$1</strong>")
+      .replace(/\n/g, " ")
+      .replace(/<strong><\/strong>/g, ""); // Remove empty <strong> tags
+  };
+
   return (
     <>
       <Link
@@ -26,7 +32,10 @@ const ArtikelCard = ({ id, title, content, image, createdAt, user }) => {
           </div>
           <div className="space-y-2 py-3">
             <h1 className="line-clamp-1 font-bold">{title}</h1>
-            <p className="line-clamp-2">{content}</p>
+            <p
+              className="line-clamp-2"
+              dangerouslySetInnerHTML={{ __html: renderContent(content) }}
+            ></p>
           </div>
         </div>
       </Link>

@@ -31,7 +31,7 @@ const Hero = () => {
           muted
           className="absolute right-0 top-0 h-[100vh] w-full object-cover z-[-1]"
         >
-          <source src="video/hero.mp4"></source>
+          <source src="/video/hero.mp4"></source>
         </video>
 
         {/* Text Hero */}
