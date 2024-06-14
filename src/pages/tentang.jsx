@@ -1,10 +1,11 @@
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const TentangPage = () => {
   return (
     <section>
       <div>
-        <img src="img/group.jpg" alt="" />
+        <LazyLoadImage src="img/group.jpg" alt="" />
       </div>
       <div className="flex justify-center items-center text-center">
         <div className="lg:py-10">
@@ -44,7 +45,7 @@ const TentangPage = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:pt-20 px-20 lg:px-48 pb-10">
           <div>
-            <img src="img/aufaa1.jpg" alt="Gambar Team" className="lg:w-auto lg:h-[400px]" />
+            <LazyLoadImage src="img/aufaa1.jpg" alt="Gambar Team" className="lg:w-auto lg:h-[400px]" />
           </div>
           <div>
             <p className="font-bold text-primary pb-2 lg:pb-5">Front-End Developer</p>
@@ -87,12 +88,12 @@ const TentangPage = () => {
             </div>
           </div>
           <div>
-            <img src="img/adriansyah1.jpg" alt="Gambar Team" className="lg:w-auto lg:h-[400px]" />
+            <LazyLoadImage src="img/adriansyah1.jpg" alt="Gambar Team" className="lg:w-auto lg:h-[400px]" />
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:pt-20 px-20 lg:px-48 pb-10">
           <div>
-            <img src="img/risky1.jpg" alt="Gambar Team" className="lg:w-auto lg:h-[400px]" />
+            <LazyLoadImage src="img/risky1.jpg" alt="Gambar Team" className="lg:w-auto lg:h-[400px]" />
           </div>
           <div>
             <p className="font-bold text-primary pb-2 lg:pb-5">Back-End Developer</p>

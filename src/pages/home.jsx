@@ -11,8 +11,8 @@ const Home = () => {
             <Contents />
             <div className="flex items-center justify-center pt-10">
                 <div className="text-center">
-                <h1 className="text-primary font-bold text-4xl pb-3">Campaign</h1>
-                <p className="text-tertiary sm:text-sm">Mari kita bersama-sama ciptakan masa depan pariwisata yang lebih berkelanjutan!</p>
+                    <h1 className="text-primary font-bold text-4xl pb-3">Campaign</h1>
+                    <p className="text-tertiary sm:text-sm">Mari kita bersama-sama ciptakan masa depan pariwisata yang lebih berkelanjutan!</p>
                 </div>
             </div>
             <CampaignDetail />

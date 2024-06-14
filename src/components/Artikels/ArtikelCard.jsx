@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import convertDate from "../../utils/dateConverter";
 import config from "../../utils/config";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const ArtikelCard = ({ id, title, content, image, createdAt, user }) => {
   const renderContent = (content) => {
@@ -20,7 +21,7 @@ const ArtikelCard = ({ id, title, content, image, createdAt, user }) => {
       >
         <div className="p-4 shadow-lg transition-all duration-500 hover:shadow-xl rounded-2xl">
           <div className="overflow-hidden">
-            <img
+            <LazyLoadImage
               src={`${config.baseUrl}/images/articles/${image}`}
               alt="Gambar artikel"
               className="mx-auto h-[250px] w-full object-cover transition duration-700 hover:skew-x-2 hover:scale-110"

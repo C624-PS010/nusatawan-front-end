@@ -2,6 +2,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import config from "../../utils/config";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const kategoris = [
   { name: "Ekowisata", title: "Ekowisata" },
@@ -59,7 +60,7 @@ const CardKategori = () => {
             key={kategori.name}
           >
             <a href="#">
-              <img
+              <LazyLoadImage
                 src={`${
                   config.baseUrl
                 }/images/categories/${kategori.name.toLowerCase()}`}

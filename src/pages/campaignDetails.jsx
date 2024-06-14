@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Campaigns from "../network/Campaigns";
 import convertDate from "../utils/dateConverter";
 import config from "../utils/config";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -32,7 +33,7 @@ const CampaignDetails = () => {
   return (
     <div className="p-5">
       <div className="h-[300px] overflow-hidden">
-        <img
+        <LazyLoadImage
           src={`${config.baseUrl}/images/campaigns/${campaignData.image}`}
           alt={`Gambar kampanye ${campaignData.title}`}
           className="mx-auto h-[300px] w-full object-cover transition duration-700 hover:scale-110"

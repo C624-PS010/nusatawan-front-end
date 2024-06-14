@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import convertDate from "../../utils/dateConverter";
 import config from "../../utils/config";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // eslint-disable-next-line react/prop-types
 const Campaign = ({ id, title, image, content, createdAt, user }) => {
@@ -13,7 +14,7 @@ const Campaign = ({ id, title, image, content, createdAt, user }) => {
     >
       <div className="p-4 shadow-lg transition-all duration-500 hover:shadow-xl rounded-2xl">
         <div className="overflow-hidden">
-          <img
+          <LazyLoadImage
             className="w-full h-52 rounded-t-2xl shadow-lg object-cover transition duration-700 hover:skew-x-2 hover:scale-110"
             src={`${config.baseUrl}/images/campaigns/${image}`}
             alt="Gambar kampanye"

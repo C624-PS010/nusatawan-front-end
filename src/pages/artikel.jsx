@@ -1,11 +1,12 @@
 import ArtikelDetail from "../components/Artikels/ArtikelDetail";
 import SearchBar from "../components/Search/Search";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const ArtikelsPage = () => {
   return (
     <>
       <div className="relative">
-        <img
+        <LazyLoadImage
           src="img/artikel2.jpg"
           alt="Background Image"
           className="w-full h-[500px] object-cover"
@@ -21,10 +22,11 @@ const ArtikelsPage = () => {
         </div>
       </div>
       <div className="flex items-center justify-center pt-10 pb-20">
-        <img src="img/artikel.jpg" alt="" className=" object-cover" />
+        <LazyLoadImage src="img/artikel.jpg" alt="" className=" object-cover" />
       </div>
+
+      {/* Artikel Card */}
       <ArtikelDetail />
-      aq
     </>
   );
 };

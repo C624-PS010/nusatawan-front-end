@@ -1,3 +1,5 @@
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 const Contents = () => {
   return (
     <>
@@ -5,7 +7,7 @@ const Contents = () => {
         <div className="p-5">
           <div className="grid lg:grid-cols-2 pt-20 gap-16">
             <div className="mx-auto">
-              <img
+              <LazyLoadImage
                 src="/img/content.png"
                 alt="Foto Destinasi"
                 className=" md:h-[500px] object-cover"
@@ -34,7 +36,7 @@ const Contents = () => {
         <div className="pt-20">
           <div className="bg-black/50 h-full">
             <div className="relative h-[350px]">
-              <img
+              <LazyLoadImage
                 src="/img/content2.jpg"
                 alt="Gambar Lautan Indonesia"
                 className="absolute right-0 h-[350px] w-full object-cover z-[-1]"

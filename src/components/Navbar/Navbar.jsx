@@ -7,6 +7,7 @@ import ResponsiveMenu from "./ResponsiveMenu";
 import { IoCallOutline } from "react-icons/io5";
 import { useGlobalState } from "../../context/GlobalStateContext";
 import localUser from "../../utils/localUser";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const NavbarLinks = [
@@ -70,7 +71,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center">
             <div>
               <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-                <img src="/img/logo.jpg" alt="Logo Nusatawan" className="h-9" />
+                <LazyLoadImage src="/img/logo.jpg" alt="Logo Nusatawan" className="h-9" />
               </Link>
             </div>
             <div className="hidden md:block">
