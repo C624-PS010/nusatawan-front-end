@@ -44,7 +44,7 @@ const ArtikelDetails = () => {
       // Replace custom tags with HTML tags
       const formattedParagraph = paragraph
         .replace(/\[b\](.*?)\[\/b\]/g, "<strong>$1</strong>")
-        .replace(/\n/g, "<br />");
+        .replace(/\n/g, "<br /> <br/>");
 
       return (
         <p
