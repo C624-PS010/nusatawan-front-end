@@ -3,17 +3,8 @@
 
 ### Built With
 
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Tailwindcss][Tailwindcss.com]][Tailwindcss-url]
-
 ## Getting Started
 
 ### Installation
 
-<!-- CONTACT -->
 ## Contact
-
-Aufaa Husniati - [Linkedin](www.linkedin.com/in/aufaahusniati) - aufaahsnt21@gmail.com
-
-Project Link: [Github](https://github.com/aufaahusniati)
