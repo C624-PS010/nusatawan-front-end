@@ -1,20 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Typed from "typed.js";
 import { Link } from "react-router-dom";
-import HeroVid from "../../assets/video/hero.mp4";
 
 const Hero = () => {
   const typedElementRef = useRef(null);
 
   useEffect(() => {
     const options = {
-      strings: [
-        "Nusantara",
-        "Indonesia",
-        "Tanah Air",
-        "Kepulauan",
-        "Alam Raya",
-      ],
+      strings: ["Nusantara", "Indonesia", "Tanah Air", "Kepulauan", "Alam Raya"],
       typeSpeed: 100, // Kecepatan pengetikan
       backSpeed: 100, // Kecepatan menghapus
       backDelay: 2000, // Waktu tunggu sebelum mulai menghapus
@@ -38,7 +31,7 @@ const Hero = () => {
           muted
           className="absolute right-0 top-0 h-[100vh] w-full object-cover z-[-1]"
         >
-          <source src={HeroVid}></source>
+          <source src="video/hero.mp4"></source>
         </video>
 
         {/* Text Hero */}
@@ -61,10 +54,7 @@ const Hero = () => {
                 </span>
               </p>
 
-              <Link
-                to="/artikel"
-                className="bg-primary h-14 p-2 px-8 font-semibold rounded-md"
-              >
+              <Link to="/artikel" className="bg-primary h-14 p-2 px-8 font-semibold rounded-md">
                 Jelajah
               </Link>
             </div>

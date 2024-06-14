@@ -14,6 +14,12 @@ const Articles = {
     return (await response).data;
   },
 
+  async deleteArticleById(id) {
+    const response = API.delete(`/articles/${id}`, { withCredentials: true });
+
+    return (await response).data;
+  },
+
   // Comments
   async addComment(articleId, userId, comment) {
     const response = API.post(
