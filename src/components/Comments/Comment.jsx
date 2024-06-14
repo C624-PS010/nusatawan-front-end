@@ -12,16 +12,10 @@ const Comment = (props) => {
     //   </div>
     // </div>
 
-    <div className="px-4 md:px-20 py-6">
+    <div className="px-4 md:px-20">
       <div className="grid grid-cols-1 gap-4">
         <div className="w-full border border-gray-300 rounded-lg shadow-sm bg-white p-6">
           <div className="flex items-center mb-4">
-            <img
-              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fctmirror.org%2Fdummy-man-570x570%2F&psig=AOvVaw2QTfwrnhuZhDJgW4qcDkkt&ust=1718425806540000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNj78JCh2oYDFQAAAAAdAAAAABAE"
-              alt="avatar"
-              className="w-10 h-10 rounded-full mr-4"
-              crossOrigin="anonymous"
-            />
             <div>
               <h1 className="font-semibold text-lg text-gray-900">
                 {username}
