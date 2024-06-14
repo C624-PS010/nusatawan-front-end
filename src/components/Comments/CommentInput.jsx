@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../Button";
 import localUser from "../../utils/localUser";
 import Articles from "../../network/Articles";
+import Alert from "../Alert/Alert";
 
 const CommentInput = (props) => {
   const { articleId } = props;
@@ -61,8 +62,14 @@ const CommentInput = (props) => {
           ></textarea>
         </div>
 
-        {isError && <p className="text-red-500">{message}</p>}
-        {!isError && <p className="text-green-500">{message}</p>}
+        {message && (
+          <Alert
+            isError={isError}
+            message={message}
+            setIsError={setIsError}
+            setMessage={setMessage}
+          />
+        )}
 
         <Button classname="bg-primary w-full">Kirim</Button>
       </form>
