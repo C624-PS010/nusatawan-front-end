@@ -12,6 +12,7 @@ import CampaignPage from "./pages/campaign";
 import CampaignDetails from "./pages/campaignDetails";
 import TentangPage from "./pages/tentang";
 import ErrorPage from "./pages/404";
+import Auth from "./components/Auth";
 
 // Dashboard
 import DashboardLayout from "./pages/Layouts/DashboardLayout";
@@ -46,14 +47,16 @@ const App = () => {
           </Route>
 
           {/* Dashboard endpoint */}
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<MainDashboard />} />
-            <Route path="artikel" element={<TableArtikel />} />
-            <Route path="artikel/:id" element={<ViewArtikel />} />
-            <Route path="artikel/create" element={<CreateArtikel />} />
-            <Route path="campaign" element={<TableCampaign />} />
-            <Route path="campaign/:id" element={<ViewCampaign />} />
-            <Route path="campaign/create" element={<CreateCampaign />} />
+          <Route path="/dashboard" element={<Auth />}>
+            <Route element={<DashboardLayout />}>
+              <Route index element={<MainDashboard />} />
+              <Route path="artikel" element={<TableArtikel />} />
+              <Route path="artikel/:id" element={<ViewArtikel />} />
+              <Route path="artikel/create" element={<CreateArtikel />} />
+              <Route path="campaign" element={<TableCampaign />} />
+              <Route path="campaign/:id" element={<ViewCampaign />} />
+              <Route path="campaign/create" element={<CreateCampaign />} />
+            </Route>
           </Route>
 
           {/* Error endpoint */}
