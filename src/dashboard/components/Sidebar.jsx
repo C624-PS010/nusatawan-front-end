@@ -35,7 +35,7 @@ const Sidebar = () => {
       <div className="flex items-center justify-center h-20 border-t border-gray-700">
         <Link to="/" className="flex items-center space-x-2 p-2 hover:bg-gray-700 rounded">
           <FiLogOut size="20" />
-          <span>Logout</span>
+          <span>Home</span>
         </Link>
       </div>
     </div>

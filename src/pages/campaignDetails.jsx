@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Campaigns from "../network/Campaign";
+import Campaigns from "../network/Campaigns";
 import convertDate from "../utils/dateConverter";
 import config from "../utils/config";
 
@@ -33,7 +33,7 @@ const CampaignDetails = () => {
     <div className="p-5">
       <div className="h-[300px] overflow-hidden">
         <img
-          src={`${config.baseUrl}/images/articles/${campaignData.image}`}
+          src={`${config.baseUrl}/images/campaigns/${campaignData.image}`}
           alt={`Gambar kampanye ${campaignData.title}`}
           className="mx-auto h-[300px] w-full object-cover transition duration-700 hover:scale-110"
         />

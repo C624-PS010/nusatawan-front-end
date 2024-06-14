@@ -1,9 +1,129 @@
 import { MdDriveFolderUpload } from "react-icons/md";
 import { useState } from "react";
-import Header from "../components/Header.jsx";
-import Sidebar from "../components/Sidebar.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import Campaigns from "../../network/Campaigns";
+import localUser from "../../utils/localUser";
+import Loading from "../../components/Loading/LoadingSpin";
 
-// eslint-disable-next-line react/prop-types
+// FORM UTAMA
+const CreateCampaign = () => {
+  const navigate = useNavigate();
+  const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+    image: null,
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleImageSelect = (file) => {
+    setFormData({
+      ...formData,
+      image: file,
+    });
+  };
+
+  const campaignSubmitHandler = async (event) => {
+    try {
+      event.preventDefault();
+      setIsLoading(true);
+
+      const localUserData = localUser.get();
+      if (!localUserData) throw new Error("User not logged in");
+
+      const { title, content, image } = formData;
+      const userId = localUserData.id;
+
+      const responseData = await Campaigns.addCampaign({
+        title,
+        content,
+        image,
+        userId,
+      });
+
+      console.log(responseData);
+      setIsError(false);
+      setMessage("Berhasil membuat campaign");
+      setIsLoading(false);
+      navigate("/dashboard/campaign");
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+      setIsError(true);
+
+      if (error.data && error.status === 401) setMessage("User not logged in");
+      else if (error.data) setMessage(error.data.message);
+      else setMessage(error.message);
+    }
+  };
+
+  return (
+    <div className="overflow-y-auto">
+      <div className="flex justify-between px-20 pt-6">
+        <h1 className="text-3xl font-bold mb-4">Create Campaign</h1>
+        <Link to="/dashboard/campaign">
+          <button
+            type="submit"
+            className="font-semibold text-white border bg-red-600  border-red-600 hover:bg-red-500 rounded-lg text-md px-14 py-2.5 mt-5 text-center me-2 mb-2 "
+          >
+            Back
+          </button>
+        </Link>
+      </div>
+      <section className="flex justify-center pb-10">
+        <form
+          onSubmit={campaignSubmitHandler}
+          className="bg-white p-5 border rounded-md shadow-md w-1/2"
+        >
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Enter the title"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Content</label>
+            <textarea
+              name="content"
+              value={formData.content}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Enter the content"
+            />
+          </div>
+          <ImageInput onImageSelect={handleImageSelect} />
+          <div className="mt-4">
+            <p className={`w-full text-${isError ? "red" : "green"}-500 mb-2 rounded p-1`}>
+              {message}
+            </p>
+            <button
+              type="submit"
+              className="bg-green-500 hover:bg-green-400 text-white w-full font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              {isLoading ? <Loading /> : "Submit"}
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  );
+};
+
+// Input Gambar
 const ImageInput = ({ onImageSelect }) => {
   const [image, setImage] = useState(null);
 
@@ -35,97 +155,6 @@ const ImageInput = ({ onImageSelect }) => {
           </span>
           <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
         </label>
-      </div>
-    </div>
-  );
-};
-
-// FORM UTAMA
-// eslint-disable-next-line react/prop-types
-const CreateCampaign = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    content: "",
-    image: null,
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleImageSelect = (file) => {
-    setFormData({
-      ...formData,
-      image: file,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (onSubmit) {
-      onSubmit(formData);
-    }
-    setFormData({
-      title: "",
-      content: "",
-      image: null,
-    });
-  };
-
-  return (
-    <div className="flex h-screen bg-gray-100">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <Header />
-        <div className="flex justify-between px-20 pt-6">
-          <h1 className="text-3xl font-bold mb-4">Create Campaign</h1>
-          <a href="/Campaign">
-            <button
-              type="submit"
-              className="font-semibold text-white border bg-red-600  border-red-600 hover:bg-red-500 rounded-lg text-md px-14 py-2.5 mt-5 text-center me-2 mb-2 "
-            >
-              Back
-            </button>
-          </a>
-        </div>
-        <section className="flex justify-center">
-          <form onSubmit={handleSubmit} className="bg-white p-5 border rounded-md shadow-md w-1/2">
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
-              <input
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter the title"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">Content</label>
-              <textarea
-                name="content"
-                value={formData.content}
-                onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter the content"
-              />
-            </div>
-            <ImageInput onImageSelect={handleImageSelect} />
-            <div className="mt-4">
-              <button
-                type="submit"
-                className="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Create Category
-              </button>
-            </div>
-          </form>
-        </section>
       </div>
     </div>
   );

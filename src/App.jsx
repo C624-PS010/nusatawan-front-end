@@ -14,16 +14,14 @@ import TentangPage from "./pages/tentang";
 import ErrorPage from "./pages/404";
 
 // Dashboard
-// import CreateCampaign from "./dashboard/Campaign/create";
-// import CreateArtikel from "./dashboard/Artikel/create";
-// import ViewCampaign from "./dashboard/Campaign/view";
-// import EditCampaign from "./dashboard/Campaign/edit";
-// import EditArtikel from "./dashboard/Artikel/edit";
 import DashboardLayout from "./pages/Layouts/DashboardLayout";
 import MainDashboard from "./dashboard/Main/Main";
 import TableArtikel from "./dashboard/Artikel";
-import TableCampaign from "./dashboard/Campaign";
 import ViewArtikel from "./dashboard/Artikel/view";
+import CreateArtikel from "./dashboard/Artikel/create";
+import TableCampaign from "./dashboard/Campaign";
+import CreateCampaign from "./dashboard/Campaign/create";
+import ViewCampaign from "./dashboard/Campaign/view";
 
 const App = () => {
   return (
@@ -47,24 +45,15 @@ const App = () => {
             <Route path="register" element={<RegisterPage />} />
           </Route>
 
-          {/* <Route>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="artikelDashboard" element={<TableArtikel />} />
-            <Route path="createArtikel" element={<CreateArtikel />} />
-            <Route path="editArtikel" element={<EditArtikel />} />
-            <Route path="viewArtikel" element={<ViewArtikel />} />
-            <Route path="campaignDashboard" element={<TableCampaign />} />
-            <Route path="createCampaign" element={<CreateCampaign />} />
-            <Route path="viewCampaign/:id" element={<ViewCampaign />} />
-            <Route path="editCampaign" element={<EditCampaign />} />
-          </Route> */}
-
           {/* Dashboard endpoint */}
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<MainDashboard />} />
             <Route path="artikel" element={<TableArtikel />} />
             <Route path="artikel/:id" element={<ViewArtikel />} />
+            <Route path="artikel/create" element={<CreateArtikel />} />
             <Route path="campaign" element={<TableCampaign />} />
+            <Route path="campaign/:id" element={<ViewCampaign />} />
+            <Route path="campaign/create" element={<CreateCampaign />} />
           </Route>
 
           {/* Error endpoint */}

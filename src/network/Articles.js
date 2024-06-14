@@ -14,6 +14,15 @@ const Articles = {
     return (await response).data;
   },
 
+  async addArticle(data) {
+    const response = API.post(`/articles`, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+      withCredentials: true,
+    });
+
+    return (await response).data;
+  },
+
   async deleteArticleById(id) {
     const response = API.delete(`/articles/${id}`, { withCredentials: true });
 
@@ -21,6 +30,12 @@ const Articles = {
   },
 
   // Comments
+  async getAllComments(articleId) {
+    const response = API.get(`/articles/${articleId}/comments`);
+
+    return (await response).data;
+  },
+
   async addComment(articleId, userId, comment) {
     const response = API.post(
       `/articles/${articleId}/comments`,
@@ -31,6 +46,13 @@ const Articles = {
     return (await response).data;
   },
 
+  async deleteComment(articleId, commentId) {
+    const response = API.delete(`/articles/${articleId}/comments/${commentId}`, {
+      withCredentials: true,
+    });
+
+    return (await response).data;
+  },
   // Rating
   async getAvgRating(id) {
     const response = API.get(`/ratings/${id}/average`);

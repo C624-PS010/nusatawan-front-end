@@ -45,12 +45,19 @@ const ResponsiveMenu = ({ showMenu, setShowMenu, logoutHandler }) => {
 
             {/* Logout button */}
             {isLoggedIn && (
-              <Button
-                classname="bg-primary hover:bg-tertiary rounded-full w-full"
-                onClick={logoutHandler}
-              >
-                Keluar
-              </Button>
+              <>
+                <Link to="/dashboard">
+                  <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button
+                  classname="bg-primary hover:bg-tertiary rounded-full w-full"
+                  onClick={logoutHandler}
+                >
+                  Keluar
+                </Button>
+              </>
             )}
           </ul>
         </nav>

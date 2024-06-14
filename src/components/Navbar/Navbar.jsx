@@ -124,24 +124,26 @@ const Navbar = () => {
                         <li className="font-semibold p-2">
                           <h1>Hello {userProfile ? userProfile.username : "there"}!</h1>
                         </li>
-                        <li>
-                          <Link
-                            to="/dashboard"
-                            className="inline-block w-full text-left rounded-md p-2 hover:bg-primary/10"
-                          >
-                            Dashboard
-                          </Link>
-                        </li>
-                        <li>
-                          {isLoggedIn && (
-                            <button
-                              className="inline-block w-full text-left rounded-md p-2 hover:bg-primary/10"
-                              onClick={logoutHandler}
-                            >
-                              Keluar
-                            </button>
-                          )}
-                        </li>
+                        {isLoggedIn && (
+                          <>
+                            <li>
+                              <Link
+                                to="/dashboard"
+                                className="inline-block w-full text-left rounded-md p-2 hover:bg-primary/10"
+                              >
+                                Dashboard
+                              </Link>
+                            </li>
+                            <li>
+                              <button
+                                className="inline-block w-full text-left rounded-md p-2 hover:bg-primary/10"
+                                onClick={logoutHandler}
+                              >
+                                Keluar
+                              </button>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                   </div>

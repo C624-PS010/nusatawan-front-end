@@ -3,26 +3,71 @@ import { Link, useParams } from "react-router-dom";
 import Articles from "../../network/Articles";
 import config from "../../utils/config";
 import convertDate from "../../utils/dateConverter";
+import DataTable from "../components/DataTable";
+import localUser from "../../utils/localUser";
 
 const ViewArtikel = () => {
   const { id } = useParams();
 
   const [articleData, setArticleData] = useState({});
+  const [articleComments, setArticleComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchArticles = async () => {
     try {
-      const response = await Articles.getArticleById(id);
-      setArticleData({ ...response.data });
+      const articleResponse = await Articles.getArticleById(id);
+      const articleCommentResponse = await Articles.getAllComments(id);
+
+      setArticleData({ ...articleResponse.data });
+      setArticleComments(articleCommentResponse.data);
       setLoading(false);
-      console.log(response.data);
+      console.log(articleResponse.data);
     } catch (error) {
       console.error("Failed to fetch articles: ", error);
     }
   };
 
+  const deleteCommentHandler = async (articleId, commentId) => {
+    try {
+      const localUserData = localUser.get();
+
+      if (!localUserData) throw new Error("User not logged in");
+      else if (!localUserData.isAdmin) throw new Error("User is not admin");
+
+      const responseData = await Articles.deleteComment(articleId, commentId);
+
+      window.alert("Berhasil menghapus data");
+      window.dispatchEvent(new Event("refreshArticle"));
+      console.log(responseData);
+    } catch (error) {
+      console.error(error);
+
+      if (error.data && error.data.status === 401) window.alert("User not logged in");
+      else if (error.data && error.data.status === 403) window.alert("User is not admin");
+      else if (error.data) window.alert(error.data.message);
+      else window.alert(error.message);
+    }
+  };
+
+  const columns = ["Body", "User"];
+  const actions = [
+    {
+      label: "Delete",
+      onClick: (commentId) => {
+        deleteCommentHandler(articleData.id, commentId);
+      },
+    },
+  ];
+  const buttonStyles = ["bg-red-600"];
+
   useEffect(() => {
     fetchArticles();
+
+    window.addEventListener("refreshArticle", fetchArticles);
+
+    return () => {
+      window.removeEventListener("refreshArticle", fetchArticles);
+    };
   }, []);
 
   if (loading) return <h1>Loading</h1>;
@@ -73,6 +118,15 @@ const ViewArtikel = () => {
           <p className="text-justify">{articleData.content}</p>
         </div>
       </div>
+
+      <h1 className="text-3xl font-bold my-5">Comments</h1>
+
+      <DataTable
+        columns={columns}
+        data={articleComments}
+        actions={actions}
+        buttonStyles={buttonStyles}
+      />
     </section>
   );
 };
