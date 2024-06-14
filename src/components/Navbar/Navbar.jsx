@@ -11,7 +11,7 @@ import localUser from "../../utils/localUser";
 // eslint-disable-next-line react-refresh/only-export-components
 export const NavbarLinks = [
   {
-    name: "Home",
+    name: "Beranda",
     link: "/",
   },
   {
@@ -63,7 +63,9 @@ const Navbar = () => {
     <>
       <nav
         className={`fixed top-0 right-0 w-full z-50 ${
-          navbarBackground ? "bg-white text-tertiary shadow-md" : "bg-transparent text-white"
+          navbarBackground
+            ? "bg-white text-tertiary shadow-md"
+            : "bg-transparent text-white"
         }`}
       >
         <div className="container py-3 sm:py-0">
@@ -85,9 +87,13 @@ const Navbar = () => {
               </ul>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 ">
               {/* Button Booking */}
-              <a href="https://web.whatsapp.com/" target="_blank">
+              <a
+                href="https://web.whatsapp.com/"
+                target="_blank"
+                className="hidden xl:block"
+              >
                 <button
                   type="button"
                   className="inline-flex items-center px-8 py-2 font-extrabold text-primary bg-white rounded-3xl border-2 border-primary hover:bg-slate-200 hover:text-primary focus:z-10"
@@ -100,42 +106,50 @@ const Navbar = () => {
               {/* Button Login */}
               {!isLoggedIn && (
                 <Link to="/auth/login">
-                  <Button classname="bg-primary rounded-3xl w-full">Login</Button>
+                  <Button classname="bg-primary rounded-3xl w-full hidden md:block">
+                    Login
+                  </Button>
                 </Link>
               )}
 
               {/* Button User Logout */}
-              <div className="hidden md:block">
-                <div className="py-4 relative group cursor-pointer">
-                  <div className="dropdown flex items-center">
-                    <span style={{ color: "#FFAA19" }}>
-                      <FaUserCircle
-                        size={50}
-                        className="transition-all duration-200 group-hover:rotate-180"
-                      ></FaUserCircle>
-                    </span>
-                  </div>
+              {/* kondisi ketika user login */}
+              {isLoggedIn && (
+                <div className="hidden md:block">
+                  <div className="py-4 relative group cursor-pointer">
+                    <div className="dropdown flex items-center">
+                      <span style={{ color: "#FFAA19" }}>
+                        <FaUserCircle
+                          size={50}
+                          className="transition-all duration-200 group-hover:rotate-180"
+                        ></FaUserCircle>
+                      </span>
+                    </div>
 
-                  {/* Dropdown User Keluar*/}
-                  <div className="absolute -left-9 z-[9999] hidden w-[150px] rounded-md bg-white p-2 text-black group-hover:block shadow-md">
-                    <ul>
-                      <li className="font-semibold p-2">
-                        <h1>Hello {userProfile ? userProfile.username : "there"}!</h1>
-                      </li>
-                      <li>
-                        {isLoggedIn && (
-                          <button
-                            className="inline-block w-full text-left rounded-md p-2 hover:bg-primary/10"
-                            onClick={logoutHandler}
-                          >
-                            Keluar
-                          </button>
-                        )}
-                      </li>
-                    </ul>
+                    {/* Dropdown User Keluar*/}
+                    <div className="absolute -left-9 z-[9999] hidden w-[150px] rounded-md bg-white p-2 text-black group-hover:block shadow-md">
+                      <ul>
+                        <li className="font-semibold p-2">
+                          <h1>
+                            Hello {userProfile ? userProfile.username : "there"}
+                            !
+                          </h1>
+                        </li>
+                        <li>
+                          {isLoggedIn && (
+                            <button
+                              className="inline-block w-full text-left rounded-md p-2 hover:bg-primary/10"
+                              onClick={logoutHandler}
+                            >
+                              Keluar
+                            </button>
+                          )}
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Hamburger */}
               <div className="md:hidden block">

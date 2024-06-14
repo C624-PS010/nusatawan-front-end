@@ -4,13 +4,13 @@ import "slick-carousel/slick/slick-theme.css";
 import config from "../../utils/config";
 
 const kategoris = [
-  { name: "Ekowisata" },
-  { name: "Gunung" },
-  { name: "laut" },
-  { name: "Pantai" },
-  { name: "Religi" },
-  { name: "Sejarah" },
-  { name: "Seni" },
+  { name: "Ekowisata", title: "Ekowisata" },
+  { name: "Gunung", title: "Gunung" },
+  { name: "Laut", title: "Laut" },
+  { name: "Pantai", title: "Pantai" },
+  { name: "Religi", title: "Religi" },
+  { name: "Sejarah", title: "Sejarah" },
+  { name: "Seni", title: "Seni" },
 ];
 
 const CardKategori = () => {
@@ -49,18 +49,23 @@ const CardKategori = () => {
           <p className="">Temukan keindahan di setiap sudut Indonesia</p>
         </div>
       </div>
-      <Slider {...settings} className="grid grid-cols-1 gap-5 p-10 lg:grid-cols-3 md:grid-cols-2">
+      <Slider
+        {...settings}
+        className="grid grid-cols-1 gap-5 p-10 lg:grid-cols-3 md:grid-cols-2"
+      >
         {kategoris.map((kategori) => (
-          // eslint-disable-next-line react/jsx-key
           <div
-            className="relative overflow-hidden rounded-2xl shadow-lg group h-[400px] w-full "
+            className="relative overflow-hidden rounded-2xl shadow-lg group h-[400px] w-full"
             key={kategori.name}
           >
             <a href="#">
               <img
-                src={`${config.baseUrl}/images/categories/${kategori.name.toLowerCase()}`}
-                alt="contoh"
-                className="transition-transform group-hover:scale-110 duration-200"
+                src={`${
+                  config.baseUrl
+                }/images/categories/${kategori.name.toLowerCase()}`}
+                alt={`Foto ${kategori.name}`}
+                className="object-cover w-full h-full transition-transform group-hover:scale-110 duration-200"
+                style={{ minHeight: "400px" }} // Tambahan style untuk mengatur tinggi minimum
               />
             </a>
             <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent">
