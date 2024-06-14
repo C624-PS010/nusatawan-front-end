@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Typed from "typed.js";
 import { Link } from "react-router-dom";
-import HeroVid from "../../assets/video/hero.mp4";
 
 const Hero = () => {
   const typedElementRef = useRef(null);
@@ -38,7 +37,7 @@ const Hero = () => {
           muted
           className="absolute right-0 top-0 h-[100vh] w-full object-cover z-[-1]"
         >
-          <source src={HeroVid}></source>
+          <source src="/video/hero.mp4"></source>
         </video>
 
         {/* Text Hero */}
