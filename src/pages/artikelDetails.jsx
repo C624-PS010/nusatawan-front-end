@@ -21,6 +21,7 @@ const ArtikelDetails = () => {
       console.log(response.data);
     } catch (error) {
       console.error("Failed to fetch articles: ", error);
+      setLoading(false);
     }
   };
 
@@ -32,11 +33,28 @@ const ArtikelDetails = () => {
     return () => {
       window.removeEventListener("refreshArticle", fetchArticles);
     };
-  }, []);
+  }, [id]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  const renderContent = (content) => {
+    return content.split("\n\n").map((paragraph, index) => {
+      // Replace custom tags with HTML tags
+      const formattedParagraph = paragraph
+        .replace(/\[b\](.*?)\[\/b\]/g, "<strong>$1</strong>")
+        .replace(/\n/g, "<br />");
+
+      return (
+        <p
+          key={index}
+          className="text-justify"
+          dangerouslySetInnerHTML={{ __html: formattedParagraph }}
+        ></p>
+      );
+    });
+  };
 
   return (
     <div className="p-5">
@@ -47,13 +65,17 @@ const ArtikelDetails = () => {
           className="mx-auto h-[300px] w-full object-cover transition duration-700 hover:scale-110"
         />
       </div>
-      <div className="container ">
+      <div className="container mx-auto px-4">
         <p className="text-slate-600 text-sm py-3">
-          {" "}
-          Ditulis oleh {articleData.user.username} pada {convertDate(articleData.createdAt)}
+          Ditulis oleh {articleData.user.username} pada{" "}
+          {convertDate(articleData.createdAt)}
         </p>
-        <h1 className="text-3xl font-bold pb-10">{articleData.title}</h1>
-        <p className="text-justify">{articleData.content}</p>
+        <h1 className="text-3xl font-bold pb-10">
+          <span className="font-bold text-4xl">
+            {articleData.title.replace(/\[b\](.*?)\[\/b\]/g, "$1")}
+          </span>
+        </h1>
+        <div className="space-y-6">{renderContent(articleData.content)}</div>
       </div>
 
       <div className="mt-8">
@@ -62,7 +84,9 @@ const ArtikelDetails = () => {
 
       {/* Rating */}
       <div className="justify-center items-center text-center p-10">
-        <h1 className="text-2xl font-bold mb-4 text-tertiary">Berikan Kami umpan balik</h1>
+        <h1 className="text-2xl font-bold mb-4 text-tertiary">
+          Berikan Kami umpan balik
+        </h1>
         <Rating id={id} />
       </div>
 
