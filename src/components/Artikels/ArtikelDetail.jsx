@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import ArtikelCard from "./ArtikelCard";
 import Articles from "../../network/Articles";
 
-const ArtikelDetail = () => {
+const 
+ArtikelDetail = () => {
   const [articlesData, setArticlesData] = useState([]);
 
   useEffect(() => {

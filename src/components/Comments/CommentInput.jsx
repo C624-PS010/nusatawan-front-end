@@ -19,7 +19,11 @@ const CommentInput = (props) => {
 
       const comment = event.target.commentInput.value;
       const userId = localUserData.id;
-      const responseData = await Articles.addComment(articleId, userId, comment);
+      const responseData = await Articles.addComment(
+        articleId,
+        userId,
+        comment
+      );
 
       setIsError(false);
       setMessage("Berhasil mengirim komentar");
@@ -43,8 +47,11 @@ const CommentInput = (props) => {
 
   return (
     <>
-      <form onSubmit={submitCommentHandler} className="flex flex-col gap-3 px-20 pb-10">
-        <h1 className="my-5 pl-2 text-3xl font-bold text-tertiary">Komentar</h1>
+      <form
+        onSubmit={submitCommentHandler}
+        className="flex flex-col gap-3 px-5 pb-10 md:px-20"
+      >
+        <h1 className="my-5  text-3xl font-bold text-tertiary">Komentar</h1>
         <div className="relative" data-twe-input-wrapper-init>
           <textarea
             className="peer block min-h-[auto] w-full rounded border-1 bg-slate-100 px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"

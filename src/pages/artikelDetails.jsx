@@ -6,6 +6,7 @@ import CommentInput from "../components/Comments/CommentInput";
 import Articles from "../network/Articles";
 import convertDate from "../utils/dateConverter";
 import config from "../utils/config";
+import RatingTotalUser from "../components/Rating/RatingTotalUser";
 
 const ArtikelDetails = () => {
   const { id } = useParams();
@@ -70,11 +71,18 @@ const ArtikelDetails = () => {
           Ditulis oleh {articleData.user.username} pada{" "}
           {convertDate(articleData.createdAt)}
         </p>
-        <h1 className="text-3xl font-bold pb-10">
-          <span className="font-bold text-4xl">
-            {articleData.title.replace(/\[b\](.*?)\[\/b\]/g, "$1")}
-          </span>
-        </h1>
+        <div className="flex flex-col md:flex-row md:justify-between">
+          {/* Title */}
+          <h1 className="text-3xl font-bold md:pb-7">
+            <span className="font-bold text-4xl">{articleData.title}</span>
+          </h1>
+
+          {/* Rating */}
+          <div className="text-justify">
+            <RatingTotalUser id={id} />
+          </div>
+        </div>
+
         <div className="space-y-6">{renderContent(articleData.content)}</div>
       </div>
 
@@ -85,7 +93,7 @@ const ArtikelDetails = () => {
       {/* Rating */}
       <div className="justify-center items-center text-center p-10">
         <h1 className="text-2xl font-bold mb-4 text-tertiary">
-          Berikan Kami umpan balik
+          Berikan Rating Anda
         </h1>
         <Rating id={id} />
       </div>
@@ -98,8 +106,8 @@ const ArtikelDetails = () => {
       <CommentInput articleId={articleData.id} />
 
       {articleData.comments && articleData.comments.length === 0 && (
-        <h1 className="px-20 mb-20 text-center text-2xl font-bold">
-          Masih belum ada komen disini, jadilah yang pertama!
+        <h1 className=" mb-20 text-base text-center w-full font-bold">
+          Belum ada komentar di sini!
         </h1>
       )}
 

@@ -32,6 +32,12 @@ const Articles = {
     return (await response).data;
   },
 
+  async getTotalUserRating(id) {
+    const response = API.get(`/ratings/${id}/total`);
+
+    return (await response).data;
+  },
+
   async postRating(articleId, userId, rating) {
     const response = API.post(
       `/ratings/${articleId}`,
