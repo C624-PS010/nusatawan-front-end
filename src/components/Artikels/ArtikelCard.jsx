@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import convertDate from "../../utils/dateConverter";
 import config from "../../utils/config";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const ArtikelCard = ({ id, title, content, image, createdAt, user }) => {
+const ArtikelCard = ({
+  id,
+  title,
+  content,
+  category,
+  image,
+  createdAt,
+  user,
+}) => {
   const renderContent = (content) => {
     return content
-      .replace(/\[b\](.*?)\[\/b\]/g, "<strong>$1</strong>")
+      .replace(/\[b\](.*?)\[\/b\]/g, "")
       .replace(/\n/g, " ")
       .replace(/<strong><\/strong>/g, ""); // Remove empty <strong> tags
   };
@@ -37,6 +45,14 @@ const ArtikelCard = ({ id, title, content, image, createdAt, user }) => {
               className="line-clamp-2"
               dangerouslySetInnerHTML={{ __html: renderContent(content) }}
             ></p>
+          </div>
+          <div className="inline-block bg-slate-300 px-2 rounded p-1">
+            <p
+              className="line-clamp-1 text-black text-base font-semibold"
+              style={{ textTransform: "capitalize" }}
+            >
+              {category}
+            </p>
           </div>
         </div>
       </Link>
