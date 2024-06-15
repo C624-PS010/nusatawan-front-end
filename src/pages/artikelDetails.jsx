@@ -44,8 +44,12 @@ const ArtikelDetails = () => {
     return content.split("\n\n").map((paragraph, index) => {
       // Replace custom tags with HTML tags
       const formattedParagraph = paragraph
-        .replace(/\[b\](.*?)\[\/b\]/g, "<strong>$1</strong>")
-        .replace(/\n/g, "<br /> <br/>");
+        .replace(
+          /\[b\](.*?)\[\/b\]/g,
+          "<div style='font-weight: bold; font-size: 18px; padding-top: 20px; '>$1</div>"
+        )
+        .replace(/\[li\](.*?)\[\/li\]/g, "<li >$1</li>")
+        .replace(/\n/g, "<br />");
 
       return (
         <p
@@ -68,7 +72,7 @@ const ArtikelDetails = () => {
       </div>
       <div className="container mx-auto px-4">
         <p className="text-slate-600 text-sm py-3">
-          Ditulis oleh {articleData.user.username} pada{" "}
+          Ditulis oleh {articleData.user?.username} pada{" "}
           {convertDate(articleData.createdAt)}
         </p>
         <div className="flex flex-col md:flex-row md:justify-between">
@@ -116,7 +120,7 @@ const ArtikelDetails = () => {
           {articleData.comments.map((comment) => (
             <Comment
               key={comment.id}
-              username={comment.user.username}
+              username={comment.user?.username}
               createdAt={convertDate(comment.createdAt)}
             >
               {comment.body}
