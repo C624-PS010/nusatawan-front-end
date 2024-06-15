@@ -1,38 +1,27 @@
-import { useState, useEffect } from "react";
 import ArtikelCard from "./ArtikelCard";
-import Articles from "../../network/Articles";
+import { useArticleState } from "../../context/ArticleStateContext";
+import LoadingSpin from "../Loading/LoadingSpin";
 
-const 
-ArtikelDetail = () => {
-  const [articlesData, setArticlesData] = useState([]);
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const response = await Articles.getAllArticles();
-        setArticlesData(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Failed to fetch articles", error);
-      }
-    };
-
-    fetchArticles();
-  }, []);
+const ArtikelDetail = () => {
+  const { filteredArticleData, loading, isError, message } = useArticleState();
 
   return (
-    <>
-      <section data-aos="fade-up" className="container pb-10">
-        <h1 className=" my-8 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold">
-          Artikel Kami
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {articlesData.map((item) => (
-            <ArtikelCard key={item.id} {...item} />
-          ))}
-        </div>
-      </section>
-    </>
+    <section data-aos="fade-up" className="container pb-10">
+      <h1 className=" my-8 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold">
+        Artikel Kami
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        {loading ? (
+          <LoadingSpin></LoadingSpin>
+        ) : isError ? (
+          <h1>{message}</h1>
+        ) : filteredArticleData.length === 0 ? (
+          <h1 className="text-2xl font-bold">Tidak ada artikel</h1>
+        ) : (
+          filteredArticleData.map((item) => <ArtikelCard key={item.id} {...item} />)
+        )}
+      </div>
+    </section>
   );
 };
 
