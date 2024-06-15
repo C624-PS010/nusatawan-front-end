@@ -1,10 +1,11 @@
 import ArtikelDetail from "../components/Artikels/ArtikelDetail";
 import SearchBar from "../components/Search/Search";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { ArticlesProvider } from "../context/ArticleStateContext";
 
 const ArtikelsPage = () => {
   return (
-    <>
+    <ArticlesProvider>
       <div className="relative">
         <LazyLoadImage
           src="img/artikel2.jpg"
@@ -27,7 +28,7 @@ const ArtikelsPage = () => {
 
       {/* Artikel Card */}
       <ArtikelDetail />
-    </>
+    </ArticlesProvider>
   );
 };
 
