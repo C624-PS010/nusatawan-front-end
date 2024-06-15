@@ -4,7 +4,21 @@ import config from "../../utils/config";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // eslint-disable-next-line react/prop-types
-const Campaign = ({ id, title, image, content, createdAt, user }) => {
+const Campaign = ({ 
+  id, 
+  title, 
+  image, 
+  content, 
+  createdAt, 
+  user 
+}) => {
+    const renderContent = (content) => {
+      return content
+        .replace(/\[b\](.*?)\[\/b\]/g, "")
+        .replace(/\n/g, " ")
+        .replace(/<strong><\/strong>/g, ""); // Remove empty <strong> tags
+    };
+
   return (
     <Link
       to={`/campaign/${id}`}
@@ -23,7 +37,9 @@ const Campaign = ({ id, title, image, content, createdAt, user }) => {
         <div className="p-4 pb-5 text-center">
           <p className="text-gray-400 pb-2">by {user.username}</p>
           <h1 className="text-base font-semibold">{title}</h1>
-          <p className="mt-2 text-sm line-clamp-2">{content}</p>
+          <p className="mt-2 text-sm line-clamp-2"
+            dangerouslySetInnerHTML={{ __html: renderContent(content) }}
+          ></p>
           <p className="text-gray-400 mt-2">{convertDate(createdAt)}</p>
         </div>
       </div>

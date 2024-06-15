@@ -29,6 +29,26 @@ const CampaignDetails = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
+  const renderContent = (content) => {
+    return content.split("\n\n").map((paragraph, index) => {
+      // Replace custom tags with HTML tags
+      const formattedParagraph = paragraph
+        .replace(
+          /\[b\](.*?)\[\/b\]/g,
+          "<div style='font-weight: bold; font-size: 18px; padding-top: 20px; '>$1</div>"
+        )
+        .replace(/\[li\](.*?)\[\/li\]/g, "<li >$1</li>")
+        .replace(/\n/g, "<br />");
+
+      return (
+        <p
+          key={index}
+          className="text-justify"
+          dangerouslySetInnerHTML={{ __html: formattedParagraph }}
+        ></p>
+      );
+    });
+  };
 
   return (
     <div className="p-5">
@@ -45,7 +65,7 @@ const CampaignDetails = () => {
           Ditulis oleh {campaignData.user.username} pada {convertDate(campaignData.createdAt)}
         </p>
         <h1 className="text-3xl font-bold pb-10">{campaignData.title}</h1>
-        <p className="text-justify">{campaignData.content}</p>
+        <p className="text-justify">{renderContent(campaignData.content)}</p>
       </div>
     </div>
   );
