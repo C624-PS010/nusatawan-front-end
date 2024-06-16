@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Campaigns from "../network/Campaigns";
 import convertDate from "../utils/dateConverter";
 import config from "../utils/config";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -52,7 +52,7 @@ const CampaignDetails = () => {
 
   return (
     <div className="p-5">
-      <div className="h-[300px] overflow-hidden">
+      <div className="h-[300px] overflow-hidden w-5/6 mx-auto">
         <LazyLoadImage
           src={`${config.baseUrl}/images/campaigns/${campaignData.image}`}
           alt={`Gambar kampanye ${campaignData.title}`}
@@ -62,7 +62,8 @@ const CampaignDetails = () => {
       <div className="container ">
         <p className="text-slate-600 text-sm py-3">
           {" "}
-          Ditulis oleh {campaignData.user.username} pada {convertDate(campaignData.createdAt)}
+          Ditulis oleh {campaignData.user.username} pada{" "}
+          {convertDate(campaignData.createdAt)}
         </p>
         <h1 className="text-3xl font-bold pb-10">{campaignData.title}</h1>
         <p className="text-justify">{renderContent(campaignData.content)}</p>
