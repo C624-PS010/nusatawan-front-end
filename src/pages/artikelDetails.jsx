@@ -63,7 +63,7 @@ const ArtikelDetails = () => {
 
   return (
     <div className="p-5">
-      <div className="h-[300px] overflow-hidden">
+      <div className="h-[300px] overflow-hidden  w-5/6 mx-auto">
         <img
           src={`${config.baseUrl}/images/articles/${articleData.image}`}
           alt={`Gambar artikel ${articleData.title}`}
