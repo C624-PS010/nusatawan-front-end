@@ -1,9 +1,10 @@
 import ArtikelCard from "./ArtikelCard";
+import ArtikelCardSkeleton from "./ArtikelCardSkeleton";
 import { useArticleState } from "../../context/ArticleStateContext";
-import LoadingSpin from "../Loading/LoadingSpin";
 
 const ArtikelDetail = () => {
   const { filteredArticleData, loading, isError, message } = useArticleState();
+  const skeleton = [1, 2, 3];
 
   return (
     <section data-aos="fade-up" className="container pb-10">
@@ -12,7 +13,7 @@ const ArtikelDetail = () => {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {loading ? (
-          <LoadingSpin></LoadingSpin>
+          skeleton.map((item) => <ArtikelCardSkeleton key={item} />)
         ) : isError ? (
           <h1>{message}</h1>
         ) : filteredArticleData.length === 0 ? (

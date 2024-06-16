@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Articles from "../../network/Articles";
 import localUser from "../../utils/localUser";
-import Loading from "../../components/Loading/LoadingSpin";
+import LoadingSpin from "../../components/Loading/LoadingSpin";
 
 // FORM UTAMA
 const CreateArtikel = () => {
@@ -147,7 +147,7 @@ const CreateArtikel = () => {
               type="submit"
               className="bg-green-500 hover:bg-green-400 text-white w-full font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              {isLoading ? <Loading /> : "Submit"}
+              {isLoading ? <LoadingSpin color="white" /> : "Submit"}
             </button>
           </div>
         </form>

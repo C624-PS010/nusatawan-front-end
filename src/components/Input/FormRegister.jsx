@@ -5,16 +5,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import localUser from "../../utils/localUser";
 import { storeAuth } from "../../utils/authHandler";
+import LoadingSpin from "../Loading/LoadingSpin";
+import { setErrorMessage } from "../../utils/errorHandler";
 
 const FormRegister = () => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const submitRegisterHandler = async (event) => {
     try {
       event.preventDefault();
+      setLoading(true);
 
       // Getting and confirming data
       const username = event.target.username.value;
@@ -31,22 +34,21 @@ const FormRegister = () => {
 
       storeAuth(responseData.token.userToken);
 
+      setLoading(false);
       cleanInputField(event);
       console.log("Register successful:", responseData);
 
       setError(false);
-      setSuccess(true);
       setMessage("Register successful");
 
       navigate("/");
     } catch (error) {
       console.log(error);
 
+      setLoading(false);
       setError(true);
-      setSuccess(false);
 
-      if (error.data) setMessage(error.data.message);
-      else setMessage(error.message);
+      setMessage(setErrorMessage());
     }
   };
 
@@ -62,10 +64,11 @@ const FormRegister = () => {
         name="passwordConfirm"
       ></InputForm>
 
-      {error && <p className="text-red-500">{message}</p>}
-      {success && <p className="text-green-500">{message}</p>}
+      <p className={`text-${error ? "red" : "green"}-500`}>{message}</p>
 
-      <Button classname="bg-primary w-full">Daftar</Button>
+      <Button classname="bg-primary w-full">
+        {loading ? <LoadingSpin color="white" /> : "Daftar"}
+      </Button>
     </form>
   );
 };
