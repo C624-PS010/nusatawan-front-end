@@ -1,4 +1,5 @@
 import API from "./API";
+import { getAuth, getAdminAuth, checkAuth, checkAdminAuth } from "../utils/authHandler";
 
 const Articles = {
   // Articles
@@ -15,16 +16,28 @@ const Articles = {
   },
 
   async addArticle(data) {
+    checkAuth();
+
     const response = API.post(`/articles`, data, {
-      headers: { "Content-Type": "multipart/form-data" },
-      withCredentials: true,
+      headers: {
+        "auth-user": `Bearer ${getAuth()}`,
+        "Content-Type": "multipart/form-data",
+      },
     });
 
     return (await response).data;
   },
 
   async deleteArticleById(id) {
-    const response = API.delete(`/articles/${id}`, { withCredentials: true });
+    checkAuth();
+    checkAdminAuth();
+
+    const response = API.delete(`/articles/${id}`, {
+      headers: {
+        "auth-user": `Bearer ${getAuth()}`,
+        "auth-admin": `Bearer ${getAdminAuth()}`,
+      },
+    });
 
     return (await response).data;
   },
@@ -37,18 +50,26 @@ const Articles = {
   },
 
   async addComment(articleId, userId, comment) {
+    checkAuth();
+
     const response = API.post(
       `/articles/${articleId}/comments`,
       { userId, comment },
-      { withCredentials: true }
+      { headers: { "auth-user": `Bearer ${getAuth()}` } }
     );
 
     return (await response).data;
   },
 
   async deleteComment(articleId, commentId) {
+    checkAuth();
+    checkAdminAuth();
+
     const response = API.delete(`/articles/${articleId}/comments/${commentId}`, {
-      withCredentials: true,
+      headers: {
+        "auth-user": `Bearer ${getAuth()}`,
+        "auth-admin": `Bearer ${getAdminAuth()}`,
+      },
     });
 
     return (await response).data;
@@ -67,10 +88,12 @@ const Articles = {
   },
 
   async postRating(articleId, userId, rating) {
+    checkAuth();
+
     const response = API.post(
       `/ratings/${articleId}`,
       { userId, rating },
-      { withCredentials: true }
+      { headers: { "auth-user": `Bearer ${getAuth()}` } }
     );
 
     return (await response).data;

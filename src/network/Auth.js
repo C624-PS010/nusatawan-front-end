@@ -4,7 +4,6 @@ const Auth = {
   async register(data) {
     const response = API.post("/auth/register", data, {
       "Content-Type": "application/json",
-      withCredentials: true,
     });
 
     return (await response).data;
@@ -13,7 +12,6 @@ const Auth = {
   async login(data) {
     const response = API.post("/auth/login", data, {
       "Content-Type": "application/json",
-      withCredentials: true,
     });
 
     return (await response).data;

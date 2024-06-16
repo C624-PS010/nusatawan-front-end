@@ -6,6 +6,7 @@ import Button from "../Button";
 // API
 import Auth from "../../network/Auth";
 import localUser from "../../utils/localUser";
+import { storeAuth, storeAdminAuth } from "../../utils/authHandler";
 
 const FormLogin = () => {
   const [error, setError] = useState(false);
@@ -23,6 +24,9 @@ const FormLogin = () => {
       const responseData = await Auth.login({ email, password });
 
       localUser.set(responseData.data);
+
+      storeAuth(responseData.token.userToken);
+      if (responseData.token.adminToken) storeAdminAuth(responseData.token.adminToken);
 
       cleanInputField(event);
       console.log("Login successful:", responseData);
