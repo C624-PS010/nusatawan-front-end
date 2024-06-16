@@ -1,64 +1,84 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Articles from "../../network/Articles";
 import config from "../../utils/config";
 import convertDate from "../../utils/dateConverter";
 import DataTable from "../components/DataTable";
-import localUser from "../../utils/localUser";
+import { useGlobalState } from "../../context/GlobalStateContext";
+import { setErrorMessage } from "../../utils/errorHandler";
+import NeutralAlert from "../../components/Alert/NeutralAlert";
+import LoadingSpin from "../../components/Loading/LoadingSpin";
 
 const ViewArtikel = () => {
   const { id } = useParams();
-
+  const { userProfile } = useGlobalState();
   const [articleData, setArticleData] = useState({});
   const [articleComments, setArticleComments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  const [renderLoading, setRenderLoading] = useState(true);
+  const [renderError, setRenderError] = useState(false);
+  const navigate = useNavigate();
 
   const fetchArticles = async () => {
     try {
+      setRenderError(false);
+      setRenderLoading(true);
+
       const articleResponse = await Articles.getArticleById(id);
       const articleCommentResponse = await Articles.getAllComments(id);
 
       setArticleData({ ...articleResponse.data });
       setArticleComments(articleCommentResponse.data);
-      setLoading(false);
+      setRenderLoading(false);
       console.log(articleResponse.data);
     } catch (error) {
       console.error("Failed to fetch articles: ", error);
+
+      setMessage(setErrorMessage(error));
+      setRenderLoading(false);
+      setRenderError(true);
     }
   };
 
   const deleteCommentHandler = async (articleId, commentId) => {
     try {
-      const localUserData = localUser.get();
+      setMessage("Deleting data...");
 
-      if (!localUserData) throw new Error("User not logged in");
-      else if (!localUserData.isAdmin) throw new Error("User is not admin");
+      if (!userProfile) throw new Error("User not logged in");
+      else if (!userProfile.isAdmin) throw new Error("User is not admin");
 
       const responseData = await Articles.deleteComment(articleId, commentId);
 
-      window.alert("Berhasil menghapus data");
+      setMessage("Data deleted");
       window.dispatchEvent(new Event("refreshArticle"));
       console.log(responseData);
     } catch (error) {
       console.error(error);
 
-      if (error.data && error.data.status === 401) window.alert("User not logged in");
-      else if (error.data && error.data.status === 403) window.alert("User is not admin");
-      else if (error.data) window.alert(error.data.message);
-      else window.alert(error.message);
+      setMessage(setErrorMessage(error));
     }
   };
 
   const columns = ["Body", "User"];
   const actions = [
     {
-      label: "Delete",
-      onClick: (commentId) => {
-        deleteCommentHandler(articleData.id, commentId);
+      label: "View",
+      onClick: () => {
+        navigate(`/artikel/${articleData.id}`);
       },
     },
+    ...(userProfile.isAdmin
+      ? [
+          {
+            label: "Delete",
+            onClick: (commentId) => {
+              deleteCommentHandler(articleData.id, commentId);
+            },
+          },
+        ]
+      : []),
   ];
-  const buttonStyles = ["bg-red-600"];
+  const buttonStyles = ["bg-blue-600", "bg-red-600"];
 
   useEffect(() => {
     fetchArticles();
@@ -70,7 +90,13 @@ const ViewArtikel = () => {
     };
   }, []);
 
-  if (loading) return <h1>Loading</h1>;
+  if (renderLoading)
+    return (
+      <div className="flex justify-center items-center h-screen w-full">
+        <LoadingSpin color="slate" size="10" />
+      </div>
+    );
+  if (renderError) return <h1>{message}</h1>;
 
   return (
     <section className="p-20 overflow-y-auto">
@@ -121,12 +147,18 @@ const ViewArtikel = () => {
 
       <h1 className="text-3xl font-bold my-5">Comments</h1>
 
-      <DataTable
-        columns={columns}
-        data={articleComments}
-        actions={actions}
-        buttonStyles={buttonStyles}
-      />
+      {articleComments.length === 0 ? (
+        <h1 className="text-2xl font-bold">Tidak ada komentar</h1>
+      ) : (
+        <DataTable
+          columns={columns}
+          data={articleComments}
+          actions={actions}
+          buttonStyles={buttonStyles}
+        />
+      )}
+
+      {message && <NeutralAlert message={message} setMessage={setMessage}></NeutralAlert>}
     </section>
   );
 };

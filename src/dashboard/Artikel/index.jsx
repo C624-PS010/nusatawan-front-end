@@ -4,41 +4,53 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DataTable from "../components/DataTable";
 import Articles from "../../network/Articles";
-import localUser from "../../utils/localUser";
+import { useGlobalState } from "../../context/GlobalStateContext";
+import { setErrorMessage } from "../../utils/errorHandler";
+import NeutralAlert from "../../components/Alert/NeutralAlert";
+import LoadingSpin from "../../components/Loading/LoadingSpin";
 
 const TableArtikel = () => {
+  const { userProfile } = useGlobalState();
   const [articlesData, setArticlesData] = useState([]);
+  const [message, setMessage] = useState("");
+  const [renderLoading, setRenderLoading] = useState(false);
+  const [renderError, setRenderError] = useState(false);
   const navigate = useNavigate();
 
   const fetchArticles = async () => {
     try {
+      setRenderError(false);
+      setRenderLoading(true);
+
       const response = await Articles.getAllArticles();
+
       setArticlesData(response.data);
+      setRenderLoading(false);
       console.log(response);
     } catch (error) {
       console.error("Failed to fetch articles", error);
+      setRenderLoading(false);
+      setRenderError(true);
+      setMessage(setErrorMessage(error));
     }
   };
 
   const deleteHandler = async (id) => {
     try {
-      const localUserData = localUser.get();
+      setMessage("Deleting data...");
 
-      if (!localUserData) throw new Error("User not logged in");
-      else if (!localUserData.isAdmin) throw new Error("User is not admin");
+      if (!userProfile) throw new Error("User not logged in");
+      else if (!userProfile.isAdmin) throw new Error("User is not admin");
 
       const responseData = await Articles.deleteArticleById(id);
 
-      window.alert("Berhasil menghapus data");
+      setMessage("Data deleted");
       window.dispatchEvent(new Event("refreshArticle"));
       console.log(responseData);
     } catch (error) {
       console.error(error);
 
-      if (error.data && error.data.status === 401) window.alert("User not logged in");
-      else if (error.data && error.data.status === 403) window.alert("User is not admin");
-      else if (error.data) window.alert(error.data.message);
-      else window.alert(error.message);
+      setMessage(setErrorMessage(error));
     }
   };
 
@@ -60,12 +72,16 @@ const TableArtikel = () => {
         navigate(`/dashboard/artikel/${id}`);
       },
     },
-    {
-      label: "Delete",
-      onClick: (id) => {
-        deleteHandler(id);
-      },
-    },
+    ...(userProfile.isAdmin
+      ? [
+          {
+            label: "Delete",
+            onClick: (id) => {
+              deleteHandler(id);
+            },
+          },
+        ]
+      : []),
   ];
   const buttonStyles = [
     "bg-blue-500", // Style untuk tombol View
@@ -85,12 +101,21 @@ const TableArtikel = () => {
           </button>
         </Link>
       </div>
-      <DataTable
-        columns={columns}
-        data={articlesData}
-        actions={actions}
-        buttonStyles={buttonStyles}
-      />
+      {renderLoading ? (
+        <div className="flex justify-center items-center w-full">
+          <LoadingSpin color="slate" />
+        </div>
+      ) : renderError ? (
+        <h1>{message}</h1>
+      ) : (
+        <DataTable
+          columns={columns}
+          data={articlesData}
+          actions={actions}
+          buttonStyles={buttonStyles}
+        />
+      )}
+      {message && <NeutralAlert message={message} setMessage={setMessage}></NeutralAlert>}
     </div>
   );
 };
