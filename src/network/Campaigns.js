@@ -1,4 +1,5 @@
 import API from "./API";
+import { getAuth, getAdminAuth, checkAuth, checkAdminAuth } from "../utils/authHandler";
 
 const Campaigns = {
   async getAllCampaigns() {
@@ -14,16 +15,28 @@ const Campaigns = {
   },
 
   async addCampaign(data) {
+    checkAuth();
+
     const response = API.post(`/campaigns`, data, {
-      headers: { "Content-Type": "multipart/form-data" },
-      withCredentials: true,
+      headers: {
+        "auth-user": `Bearer ${getAuth()}`,
+        "Content-Type": "multipart/form-data",
+      },
     });
 
     return (await response).data;
   },
 
   async deleteCampaignById(id) {
-    const response = API.delete(`/campaigns/${id}`, { withCredentials: true });
+    checkAuth();
+    checkAdminAuth();
+
+    const response = API.delete(`/campaigns/${id}`, {
+      headers: {
+        "auth-user": `Bearer ${getAuth()}`,
+        "auth-admin": `Bearer ${getAdminAuth()}`,
+      },
+    });
 
     return (await response).data;
   },

@@ -4,6 +4,7 @@ import Auth from "../../network/Auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import localUser from "../../utils/localUser";
+import { storeAuth } from "../../utils/authHandler";
 
 const FormRegister = () => {
   const [error, setError] = useState(false);
@@ -27,6 +28,8 @@ const FormRegister = () => {
       const responseData = await Auth.register({ username, email, password, phone });
 
       localUser.set(responseData.data);
+
+      storeAuth(responseData.token.userToken);
 
       cleanInputField(event);
       console.log("Register successful:", responseData);
