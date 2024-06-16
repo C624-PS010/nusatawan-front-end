@@ -43,7 +43,7 @@ const SearchBar = () => {
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center p-4 bg-slate-200 bg-opacity-30 rounded-md shadow-xl w-auto lg:w-full max-w-4xl">
-      <div className="relative w-full md:w-auto lg:pr-48">
+      <div className="relative w-full pb-2 md:w-auto lg:pr-48">
         <input
           type="search"
           value={searchQuery}

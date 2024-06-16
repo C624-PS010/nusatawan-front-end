@@ -51,8 +51,7 @@ const TentangPage = () => {
             <p className="font-bold text-primary pb-2 lg:pb-5">Front-End Developer</p>
             <h1 className="font-bold text-2xl pb-2 lg:text-4xl lg:pb-5">Aufaa Husniati</h1>
             <p className="text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ullam ad beatae non
-              perspiciatis hic quam accusamus id blanditiis quo!
+            Mahasiswa S1 Teknik Informatika Universitas Pasundan yang saat ini sedang menjalani program MSIB di Dicoding dengan learning path Front-End Web dan Back-End. Saya memiliki ketertarikan pada bidang Web Development dan UI/UX Design. Saya juga mahir dalam menggunakan HTML, CSS, PHP, JavaScript, dan framework seperti Laravel, Bootstrap, dan TailwindCSS untuk membangun aplikasi web. 
             </p>
             <div className="flex justify-start gap-5 lg:gap-10 md:w-[75%] my-6">
               <a href="https://github.com/aufaahusniati">
@@ -72,8 +71,7 @@ const TentangPage = () => {
             <p className="font-bold text-primary pb-2 lg:pb-5">Back-End Developer</p>
             <h1 className="font-bold text-2xl pb-2 lg:text-4xl lg:pb-5">Adriansyah</h1>
             <p className="text-justify lg:pr-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ullam ad beatae non
-              perspiciatis hic quam accusamus id blanditiis quo!
+            Saya adalah seorang mahasiswa Teknik Informatika di Universitas Pamulang, saat ini sedang mengikuti program SIB Batch 6 di Dicoding. Dengan minat yang kuat pada teknologi dan pemrograman, saya bercita-cita untuk menjadi Junior Web Developer.
             </p>
             <div className="flex justify-start gap-5 lg:gap-10 md:w-[75%] my-6">
               <a href="https://github.com/Sekonso">
@@ -99,8 +97,7 @@ const TentangPage = () => {
             <p className="font-bold text-primary pb-2 lg:pb-5">Back-End Developer</p>
             <h1 className="font-bold text-2xl pb-2 lg:text-4xl lg:pb-5">Risky</h1>
             <p className="text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ullam ad beatae non
-              perspiciatis hic quam accusamus id blanditiis quo!
+            Saya adalah seseorang yang sangat tertarik dengan dunia teknologi yang terus berkembang. Saat ini, saya fokus untuk mengasah kemampuan saya dalam pengembangan web dan aplikasi, terutama dalam PHP dan JavaScript. Saya memiliki minat yang kuat untuk menemukan tren dan inovasi terbaru dalam industri teknologi, dan selalu bersemangat untuk memperluas pengetahuan dan keahlian saya.
             </p>
             <div className="flex justify-start gap-5 lg:gap-10 md:w-[75%] my-6">
               <a href="https://github.com/Aerossky">

@@ -13,7 +13,7 @@ const ArtikelsPage = () => {
           className="w-full h-[500px] object-cover"
         />
         <div className="absolute top-0 left-0 w-full h-[500px] bg-black bg-opacity-50 flex flex-col items-center justify-center">
-          <h1 className="text-white text-lg lg:text-4xl mb-4 font-bold ">
+          <h1 className="text-center text-white text-lg px-6 lg:text-4xl mb-4 font-bold ">
             Jelajahi Warisan Sejarah dan Budaya Indonesia
           </h1>
           <p className="lg:text-xl mb-10 text-primary animate-bounce">

@@ -48,7 +48,7 @@ const ArtikelCard = ({
           </div>
           <div className="inline-block bg-slate-300 px-2 rounded p-1">
             <p
-              className="line-clamp-1 text-black text-base font-semibold"
+              className="line-clamp-1 text-slate-700 text-sm"
               style={{ textTransform: "capitalize" }}
             >
               {category}
