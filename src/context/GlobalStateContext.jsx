@@ -4,7 +4,9 @@ import localUser from "../utils/localUser";
 const GlobalStateContext = createContext();
 
 export const GlobalStateProvider = ({ children }) => {
-  const [userProfile, setUserProfile] = useState(JSON.parse(localStorage.getItem("userProfile")));
+  const [userProfile, setUserProfile] = useState(
+    JSON.parse(localStorage.getItem("userProfile"))
+  );
   const [isLoggedIn, setIsLoggedIn] = useState(!!userProfile);
 
   useEffect(() => {
@@ -26,7 +28,9 @@ export const GlobalStateProvider = ({ children }) => {
   }, []);
 
   return (
-    <GlobalStateContext.Provider value={{ userProfile, isLoggedIn, setUserProfile, setIsLoggedIn }}>
+    <GlobalStateContext.Provider
+      value={{ userProfile, isLoggedIn, setUserProfile, setIsLoggedIn }}
+    >
       {children}
     </GlobalStateContext.Provider>
   );

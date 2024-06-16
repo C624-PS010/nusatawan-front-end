@@ -9,6 +9,7 @@ import config from "../utils/config";
 import RatingTotalUser from "../components/Rating/RatingTotalUser";
 import DetailPageSkeleton from "../components/DetailPageSkeleton";
 import { setErrorMessage } from "../utils/errorHandler";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ArtikelDetails = () => {
   const { id } = useParams();
@@ -66,6 +67,7 @@ const ArtikelDetails = () => {
     return () => {
       window.removeEventListener("refreshArticle", fetchArticles);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (loading) {
@@ -94,7 +96,7 @@ const ArtikelDetails = () => {
       <div className="h-[85px] bg-gray-800 w-full"></div>
       <div className="bg-slate px-20 py-10">
         <div className="h-[300px] overflow-hidden w-full">
-          <img
+          <LazyLoadImage
             src={`${config.baseUrl}/images/articles/${articleData.image}`}
             alt={`Gambar artikel ${articleData.title}`}
             className="mx-auto h-[300px] w-full object-cover transition duration-700 hover:scale-110"
@@ -102,7 +104,8 @@ const ArtikelDetails = () => {
         </div>
         <div className="container mx-auto px-4">
           <p className="text-slate-600 text-sm py-3">
-            Ditulis oleh {articleData.user?.username} pada {convertDate(articleData.createdAt)}
+            Ditulis oleh {articleData.user?.username} pada{" "}
+            {convertDate(articleData.createdAt)}
           </p>
           <div className="flex flex-col md:flex-row md:justify-between">
             {/* Title */}
@@ -125,7 +128,9 @@ const ArtikelDetails = () => {
 
         {/* Rating */}
         <div className="justify-center items-center text-center p-10">
-          <h1 className="text-2xl font-bold mb-4 text-tertiary">Berikan Rating Anda</h1>
+          <h1 className="text-2xl font-bold mb-4 text-tertiary">
+            Berikan Rating Anda
+          </h1>
           <Rating id={id} />
         </div>
 

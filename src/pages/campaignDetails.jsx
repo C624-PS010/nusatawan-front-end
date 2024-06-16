@@ -58,6 +58,7 @@ const CampaignDetails = () => {
 
   useEffect(() => {
     fetchCampaigns();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (loading) {
@@ -95,7 +96,8 @@ const CampaignDetails = () => {
         <div className="container ">
           <p className="text-slate-600 text-sm py-3">
             {" "}
-            Ditulis oleh {campaignData.user.username} pada {convertDate(campaignData.createdAt)}
+            Ditulis oleh {campaignData.user.username} pada{" "}
+            {convertDate(campaignData.createdAt)}
           </p>
           <h1 className="text-3xl font-bold pb-10">{campaignData.title}</h1>
           <p className="text-justify">{renderContent(campaignData.content)}</p>

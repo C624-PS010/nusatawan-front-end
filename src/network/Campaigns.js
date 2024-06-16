@@ -1,5 +1,10 @@
 import API from "./API";
-import { getAuth, getAdminAuth, checkAuth, checkAdminAuth } from "../utils/authHandler";
+import {
+  getAuth,
+  getAdminAuth,
+  checkAuth,
+  checkAdminAuth,
+} from "../utils/authHandler";
 
 const Campaigns = {
   async getAllCampaigns() {

@@ -19,7 +19,9 @@ const ArtikelDetail = () => {
         ) : filteredArticleData.length === 0 ? (
           <h1 className="text-2xl font-bold">Tidak ada artikel</h1>
         ) : (
-          filteredArticleData.map((item) => <ArtikelCard key={item.id} {...item} />)
+          filteredArticleData.map((item) => (
+            <ArtikelCard key={item.id} {...item} />
+          ))
         )}
       </div>
     </section>

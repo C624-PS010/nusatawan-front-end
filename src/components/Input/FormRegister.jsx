@@ -28,7 +28,12 @@ const FormRegister = () => {
       confirmPassword(password, passwordConfirm);
 
       // Post the data to API
-      const responseData = await Auth.register({ username, email, password, phone });
+      const responseData = await Auth.register({
+        username,
+        email,
+        password,
+        phone,
+      });
 
       localUser.set(responseData.data);
 
@@ -53,11 +58,18 @@ const FormRegister = () => {
   };
 
   return (
-    <form onSubmit={submitRegisterHandler} className="flex flex-col gap-5 mt-10">
+    <form
+      onSubmit={submitRegisterHandler}
+      className="flex flex-col gap-5 mt-10"
+    >
       <InputForm type="text" placeholder="Username" name="username"></InputForm>
       <InputForm type="email" placeholder="Email" name="email"></InputForm>
       <InputForm type="tel" placeholder="No. Telepon" name="telepon" />
-      <InputForm type="password" placeholder="Kata Sandi" name="password"></InputForm>
+      <InputForm
+        type="password"
+        placeholder="Kata Sandi"
+        name="password"
+      ></InputForm>
       <InputForm
         type="password"
         placeholder="Konfirmasi Kata Sandi"

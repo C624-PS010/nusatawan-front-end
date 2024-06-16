@@ -7,9 +7,8 @@ import ResponsiveMenu from "./ResponsiveMenu";
 import { IoCallOutline } from "react-icons/io5";
 import { useGlobalState } from "../../context/GlobalStateContext";
 import localUser from "../../utils/localUser";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const NavbarLinks = [
   {
     name: "Beranda",
@@ -64,14 +63,20 @@ const Navbar = () => {
     <>
       <nav
         className={`fixed top-0 right-0 w-full z-50 ${
-          navbarBackground ? "bg-white text-tertiary shadow-md" : "bg-transparent text-white"
+          navbarBackground
+            ? "bg-white text-tertiary shadow-md"
+            : "bg-transparent text-white"
         }`}
       >
         <div className="container py-3 sm:py-0">
           <div className="flex justify-between items-center">
             <div>
               <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-                <LazyLoadImage src="/img/logo.jpg" alt="Logo Nusatawan" className="h-9" />
+                <LazyLoadImage
+                  src="/img/logo.jpg"
+                  alt="Logo Nusatawan"
+                  className="h-9"
+                />
               </Link>
             </div>
             <div className="hidden md:block">
@@ -88,10 +93,14 @@ const Navbar = () => {
 
             <div className="flex items-center gap-4 ">
               {/* Button Booking */}
-              <a href="https://web.whatsapp.com/" target="_blank" className="hidden xl:block">
+              <a
+                href="https://web.whatsapp.com/"
+                target="_blank"
+                className="hidden xl:block"
+              >
                 <button
                   type="button"
-                  className="inline-flex items-center px-8 py-2 font-extrabold text-primary bg-white rounded-3xl border-2 border-primary hover:bg-slate-200 hover:text-primary focus:z-10"
+                  className="inline-flex items-center px-8 py-2 font-extrabold text-primary bg-white rounded-3xl border-2 border-primary hover:scale-105 duration-300 hover:text-primary focus:z-10"
                 >
                   <IoCallOutline className="w-5 h-5 mr-2" />
                   Booking
@@ -101,7 +110,9 @@ const Navbar = () => {
               {/* Button Login */}
               {!isLoggedIn && (
                 <Link to="/auth/login">
-                  <Button classname="bg-primary rounded-3xl w-full hidden md:block">Login</Button>
+                  <Button classname="bg-primary rounded-3xl w-full hidden md:block">
+                    Login
+                  </Button>
                 </Link>
               )}
 
@@ -123,7 +134,10 @@ const Navbar = () => {
                     <div className="absolute -left-9 z-[9999] hidden w-[150px] rounded-md bg-white p-2 text-black group-hover:block shadow-md">
                       <ul>
                         <li className="font-semibold p-2">
-                          <h1>Hello {userProfile ? userProfile.username : "there"}!</h1>
+                          <h1>
+                            Hello {userProfile ? userProfile.username : "there"}
+                            !
+                          </h1>
                         </li>
                         {isLoggedIn && (
                           <>

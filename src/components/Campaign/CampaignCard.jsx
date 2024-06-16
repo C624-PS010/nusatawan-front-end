@@ -3,7 +3,6 @@ import convertDate from "../../utils/dateConverter";
 import config from "../../utils/config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-// eslint-disable-next-line react/prop-types
 const Campaign = ({ id, title, image, content, createdAt, user }) => {
   const renderContent = (content) => {
     return content

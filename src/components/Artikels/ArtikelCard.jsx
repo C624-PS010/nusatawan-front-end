@@ -3,7 +3,15 @@ import convertDate from "../../utils/dateConverter";
 import config from "../../utils/config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const ArtikelCard = ({ id, title, content, category, image, createdAt, user }) => {
+const ArtikelCard = ({
+  id,
+  title,
+  content,
+  category,
+  image,
+  createdAt,
+  user,
+}) => {
   const renderContent = (content) => {
     return content
       .replace(/\[b\](.*?)\[\/b\]/g, "")

@@ -4,7 +4,6 @@ import { NavbarLinks } from "./Navbar";
 import Button from "../Button";
 import { useGlobalState } from "../../context/GlobalStateContext";
 
-// eslint-disable-next-line react/prop-types
 const ResponsiveMenu = ({ showMenu, setShowMenu, logoutHandler }) => {
   const { userProfile, isLoggedIn } = useGlobalState();
 
@@ -18,8 +17,12 @@ const ResponsiveMenu = ({ showMenu, setShowMenu, logoutHandler }) => {
         <div className="flex items-center justify-start gap-3">
           <FaUserCircle size={50} />
           <div>
-            <h1 className="font-semibold">Hello {userProfile ? userProfile.username : "There"}!</h1>
-            <h1 className="text-sm text-slate-500">{isLoggedIn ? "Logged in" : "Guest user"}</h1>
+            <h1 className="font-semibold">
+              Hello {userProfile ? userProfile.username : "There"}!
+            </h1>
+            <h1 className="text-sm text-slate-500">
+              {isLoggedIn ? "Logged in" : "Guest user"}
+            </h1>
           </div>
         </div>
         <nav className="mt-12">
@@ -39,7 +42,9 @@ const ResponsiveMenu = ({ showMenu, setShowMenu, logoutHandler }) => {
             {/* To login */}
             {!isLoggedIn && (
               <Link to="auth/login">
-                <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">Login</Button>
+                <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">
+                  Login
+                </Button>
               </Link>
             )}
 

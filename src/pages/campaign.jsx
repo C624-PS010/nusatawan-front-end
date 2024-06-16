@@ -1,5 +1,5 @@
 import CampaignDetail from "../components/Campaign/CampaignDetail";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CampaignPage = () => {
   return (

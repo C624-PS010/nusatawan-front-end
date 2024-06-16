@@ -8,6 +8,7 @@ import { useGlobalState } from "../../context/GlobalStateContext";
 import { setErrorMessage } from "../../utils/errorHandler";
 import NeutralAlert from "../../components/Alert/NeutralAlert";
 import LoadingSpin from "../../components/Loading/LoadingSpin";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ViewArtikel = () => {
   const { id } = useParams();
@@ -88,6 +89,7 @@ const ViewArtikel = () => {
     return () => {
       window.removeEventListener("refreshArticle", fetchArticles);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (renderLoading)
@@ -115,7 +117,7 @@ const ViewArtikel = () => {
         <div className="w-full">
           {/* Image */}
 
-          <img
+          <LazyLoadImage
             src={`${config.baseUrl}/images/articles/${articleData.image}`}
             alt="Gambar artikel"
             className="w-full"
@@ -124,16 +126,26 @@ const ViewArtikel = () => {
           <div>
             <ul className="pt-10">
               <li className="font-semibold">
-                Title : <span className="font-normal"> {articleData.title} </span>
+                Title :{" "}
+                <span className="font-normal"> {articleData.title} </span>
               </li>
               <li className="font-semibold">
-                Date : <span className="font-normal"> {convertDate(articleData.createdAt)} </span>
+                Date :{" "}
+                <span className="font-normal">
+                  {" "}
+                  {convertDate(articleData.createdAt)}{" "}
+                </span>
               </li>
               <li className="font-semibold">
-                Author : <span className="font-normal"> {articleData.user.username} </span>
+                Author :{" "}
+                <span className="font-normal">
+                  {" "}
+                  {articleData.user.username}{" "}
+                </span>
               </li>
               <li className="font-semibold">
-                Category : <span className="font-normal"> {articleData.category} </span>
+                Category :{" "}
+                <span className="font-normal"> {articleData.category} </span>
               </li>
             </ul>
           </div>
@@ -158,7 +170,9 @@ const ViewArtikel = () => {
         />
       )}
 
-      {message && <NeutralAlert message={message} setMessage={setMessage}></NeutralAlert>}
+      {message && (
+        <NeutralAlert message={message} setMessage={setMessage}></NeutralAlert>
+      )}
     </section>
   );
 };

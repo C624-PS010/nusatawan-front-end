@@ -1,7 +1,6 @@
 import Input from "./Input";
 
 const InputForm = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { name, type, placeholder } = props;
   return (
     <div className="relative">

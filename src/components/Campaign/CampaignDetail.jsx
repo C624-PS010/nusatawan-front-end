@@ -49,7 +49,9 @@ const CampaignDetail = () => {
           ) : campaignsData.length === 0 ? (
             <h1 className="text-2xl font-bold">Tidak ada artikel</h1>
           ) : (
-            campaignsData.map((item) => <CampaignCard key={item.id} {...item} />)
+            campaignsData.map((item) => (
+              <CampaignCard key={item.id} {...item} />
+            ))
           )}
         </div>
       </div>

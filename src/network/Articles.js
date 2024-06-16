@@ -1,5 +1,10 @@
 import API from "./API";
-import { getAuth, getAdminAuth, checkAuth, checkAdminAuth } from "../utils/authHandler";
+import {
+  getAuth,
+  getAdminAuth,
+  checkAuth,
+  checkAdminAuth,
+} from "../utils/authHandler";
 
 const Articles = {
   // Articles
@@ -65,12 +70,15 @@ const Articles = {
     checkAuth();
     checkAdminAuth();
 
-    const response = API.delete(`/articles/${articleId}/comments/${commentId}`, {
-      headers: {
-        "auth-user": `Bearer ${getAuth()}`,
-        "auth-admin": `Bearer ${getAdminAuth()}`,
-      },
-    });
+    const response = API.delete(
+      `/articles/${articleId}/comments/${commentId}`,
+      {
+        headers: {
+          "auth-user": `Bearer ${getAuth()}`,
+          "auth-admin": `Bearer ${getAdminAuth()}`,
+        },
+      }
+    );
 
     return (await response).data;
   },

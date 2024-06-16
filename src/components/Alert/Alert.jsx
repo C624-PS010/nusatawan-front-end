@@ -27,7 +27,9 @@ const Alert = ({ isError, message, setIsError, setMessage }) => {
         </span>
 
         <div className="flex-1">
-          <strong className="block font-medium">{isError ? "Error" : "Changes saved"}</strong>
+          <strong className="block font-medium">
+            {isError ? "Error" : "Changes saved"}
+          </strong>
           <p className="mt-1 text-sm">{message}</p>
         </div>
 
@@ -47,7 +49,11 @@ const Alert = ({ isError, message, setIsError, setMessage }) => {
             stroke="currentColor"
             className="h-6 w-6"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>

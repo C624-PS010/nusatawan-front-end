@@ -5,6 +5,7 @@ import Alert from "../Alert/Alert";
 
 const Rating = (props) => {
   const { id } = props;
+  // eslint-disable-next-line no-unused-vars
   const [currentRating, setCurrentRating] = useState(1);
   const [hover, setHover] = useState(0);
   const [isError, setIsError] = useState(false);
@@ -65,6 +66,7 @@ const Rating = (props) => {
     return () => {
       window.removeEventListener("refreshRating", fetchRating);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

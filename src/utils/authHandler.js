@@ -19,7 +19,15 @@ const checkAuth = () => {
 };
 
 const checkAdminAuth = () => {
-  if (!getAdminAuth()) throw new Error("Admin token required, please login as admin first");
+  if (!getAdminAuth())
+    throw new Error("Admin token required, please login as admin first");
 };
 
-export { storeAuth, storeAdminAuth, getAuth, getAdminAuth, checkAuth, checkAdminAuth };
+export {
+  storeAuth,
+  storeAdminAuth,
+  getAuth,
+  getAdminAuth,
+  checkAuth,
+  checkAdminAuth,
+};

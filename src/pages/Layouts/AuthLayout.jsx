@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const AuthLayout = () => {
   return (
@@ -8,7 +9,7 @@ const AuthLayout = () => {
           <Outlet />
         </div>
         <div className="md:block hidden w-1/2 p-5">
-          <img src="/img/login.jpg" alt="" className="rounded-2xl" />
+          <LazyLoadImage src="/img/login.jpg" alt="" className="rounded-2xl" />
         </div>
       </div>
     </section>

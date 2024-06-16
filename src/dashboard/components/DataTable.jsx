@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
+ 
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 
-// eslint-disable-next-line react/prop-types
+ 
 const DataTable = ({ columns, data, actions, buttonStyles }) => {
   return (
     <div className="overflow-x-auto">

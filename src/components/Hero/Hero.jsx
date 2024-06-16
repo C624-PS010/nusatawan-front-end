@@ -7,7 +7,13 @@ const Hero = () => {
 
   useEffect(() => {
     const options = {
-      strings: ["Nusantara", "Indonesia", "Tanah Air", "Kepulauan", "Alam Raya"],
+      strings: [
+        "Nusantara",
+        "Indonesia",
+        "Tanah Air",
+        "Kepulauan",
+        "Alam Raya",
+      ],
       typeSpeed: 100, // Kecepatan pengetikan
       backSpeed: 100, // Kecepatan menghapus
       backDelay: 2000, // Waktu tunggu sebelum mulai menghapus
@@ -54,7 +60,10 @@ const Hero = () => {
                 </span>
               </p>
 
-              <Link to="/artikel" className="bg-primary h-14 p-2 px-8 font-semibold rounded-md">
+              <Link
+                to="/artikel"
+                className="bg-primary h-14 p-2 px-8 font-semibold rounded-md"
+              >
                 Jelajah
               </Link>
             </div>

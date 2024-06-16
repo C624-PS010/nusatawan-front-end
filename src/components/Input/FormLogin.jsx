@@ -29,7 +29,8 @@ const FormLogin = () => {
       localUser.set(responseData.data);
 
       storeAuth(responseData.token.userToken);
-      if (responseData.token.adminToken) storeAdminAuth(responseData.token.adminToken);
+      if (responseData.token.adminToken)
+        storeAdminAuth(responseData.token.adminToken);
 
       setLoading(false);
       cleanInputField(event);
@@ -51,7 +52,11 @@ const FormLogin = () => {
   return (
     <form onSubmit={submitLoginHandler} className="flex flex-col gap-6 mt-10">
       <InputForm type="email" placeholder="Email" name="email"></InputForm>
-      <InputForm type="password" placeholder="Kata Sandi" name="password"></InputForm>
+      <InputForm
+        type="password"
+        placeholder="Kata Sandi"
+        name="password"
+      ></InputForm>
 
       <p className={`text-${error ? "red" : "green"}-500`}>{message}</p>
 

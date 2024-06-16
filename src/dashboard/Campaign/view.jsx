@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Campaigns from "../../network/Campaigns";
 import config from "../../utils/config";
 import convertDate from "../../utils/dateConverter";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ViewCampaign = () => {
   const { id } = useParams();
@@ -23,6 +24,7 @@ const ViewCampaign = () => {
 
   useEffect(() => {
     fetchCampaigns();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <h1>Loading</h1>;
@@ -44,7 +46,7 @@ const ViewCampaign = () => {
         <div className="w-full">
           {/* Image */}
 
-          <img
+          <LazyLoadImage
             src={`${config.baseUrl}/images/campaigns/${campaignData.image}`}
             alt="Gambar campaign"
             className="w-full"
@@ -53,13 +55,22 @@ const ViewCampaign = () => {
           <div>
             <ul className="pt-10">
               <li className="font-semibold">
-                Title : <span className="font-normal"> {campaignData.title} </span>
+                Title :{" "}
+                <span className="font-normal"> {campaignData.title} </span>
               </li>
               <li className="font-semibold">
-                Date : <span className="font-normal"> {convertDate(campaignData.createdAt)} </span>
+                Date :{" "}
+                <span className="font-normal">
+                  {" "}
+                  {convertDate(campaignData.createdAt)}{" "}
+                </span>
               </li>
               <li className="font-semibold">
-                Author : <span className="font-normal"> {campaignData.user.username} </span>
+                Author :{" "}
+                <span className="font-normal">
+                  {" "}
+                  {campaignData.user.username}{" "}
+                </span>
               </li>
             </ul>
           </div>

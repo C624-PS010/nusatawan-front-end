@@ -4,6 +4,7 @@ import {
   FaInstagramSquare,
   FaTwitterSquare,
 } from "react-icons/fa";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Footer = () => {
   return (
@@ -12,7 +13,11 @@ const Footer = () => {
         <div className="grid xl:grid-cols-12 grid-col-1 gap-5 lg:gap-40">
           <div className="lg:col-span-4 col-span-12">
             <a href="/">
-              <img src="img/logo.jpg" alt="Logo Nusatawan" className="h-12" />
+              <LazyLoadImage
+                src="/img/logo.jpg"
+                alt="Logo Nusatawan"
+                className="h-12"
+              />
             </a>
             <p className="mt-6">
               Temukan cerita perjalanan inspiratif dan panduan wisata yang
@@ -67,7 +72,7 @@ const Footer = () => {
                     href=""
                     className="hover:text-gray-400 transition-all duration-500 ease-in-out"
                   >
-                    Reservasi
+                    Booking
                   </a>
                 </li>
                 <a

@@ -5,7 +5,7 @@ const Button = ({ children, type = "submit", className = "", onClick }) => {
       type={type}
       onClick={onClick}
     >
-      <span className="rounded-3xl absolute inset-0 translate-x-0 translate-y-0 bg-primary transition-transform"></span>
+      <span className="rounded-3xl absolute inset-0 translate-x-0 translate-y-0 bg-primary hover:scale-105 duration-300 text-white"></span>
       <span className="relative text-white">{children}</span>
     </button>
   );

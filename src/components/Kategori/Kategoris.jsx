@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+// eslint-disable-next-line no-unused-vars
 import config from "../../utils/config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
@@ -51,7 +52,10 @@ const CardKategori = () => {
           <p className="">Temukan keindahan di setiap sudut Indonesia</p>
         </div>
       </div>
-      <Slider {...settings} className="grid grid-cols-1 gap-5 p-10 lg:grid-cols-3 md:grid-cols-2">
+      <Slider
+        {...settings}
+        className="grid grid-cols-1 gap-5 p-10 lg:grid-cols-3 md:grid-cols-2"
+      >
         {kategoris.map((kategori) => (
           <Link
             to={`/artikel?filter=${kategori.name.toLocaleLowerCase()}`}

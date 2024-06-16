@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Campaigns from "../../network/Campaigns";
 import localUser from "../../utils/localUser";
 import Loading from "../../components/Loading/LoadingSpin";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // FORM UTAMA
 const CreateCampaign = () => {
@@ -85,7 +86,9 @@ const CreateCampaign = () => {
           className="bg-white p-5 border rounded-md shadow-md w-1/2"
         >
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Title
+            </label>
             <input
               type="text"
               name="title"
@@ -96,7 +99,9 @@ const CreateCampaign = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Content</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Content
+            </label>
             <textarea
               name="content"
               value={formData.content}
@@ -107,7 +112,11 @@ const CreateCampaign = () => {
           </div>
           <ImageInput onImageSelect={handleImageSelect} />
           <div className="mt-4">
-            <p className={`w-full text-${isError ? "red" : "green"}-500 mb-2 rounded p-1`}>
+            <p
+              className={`w-full text-${
+                isError ? "red" : "green"
+              }-500 mb-2 rounded p-1`}
+            >
               {message}
             </p>
             <button
@@ -143,17 +152,28 @@ const ImageInput = ({ onImageSelect }) => {
 
   return (
     <div className="mt-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image</label>
+      <label className="block text-gray-700 text-sm font-bold mb-2">
+        Upload Image
+      </label>
       <div className="flex items-center justify-center">
         <label className="cursor-pointer">
           <span className="inline-block bg-gray-200 hover:bg-gray-300 rounded-md p-2">
             {image ? (
-              <img src={image} alt="Selected" className="w-40 h-40 object-cover rounded-md" />
+              <LazyLoadImage
+                src={image}
+                alt="Selected"
+                className="w-40 h-40 object-cover rounded-md"
+              />
             ) : (
               <MdDriveFolderUpload className="w-12 h-12 text-gray-500" />
             )}
           </span>
-          <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImageChange}
+          />
         </label>
       </div>
     </div>
