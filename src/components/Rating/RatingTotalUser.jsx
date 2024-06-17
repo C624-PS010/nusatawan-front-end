@@ -16,8 +16,10 @@ const RatingTotalUser = ({ id }) => {
 
         if (!totalUserRatingResponse.data) setTotalUserRating(0);
         else setTotalUserRating(totalUserRatingResponse.data);
+
+        console.log(ratingResponse);
       } catch (error) {
-        console.error("Failed to fetch rating", error);
+        console.error("Failed to fetch rating");
       }
     };
 

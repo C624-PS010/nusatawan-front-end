@@ -28,8 +28,6 @@ const TableCampaign = () => {
       setRenderLoading(false);
       console.log(response);
     } catch (error) {
-      console.error("Failed to fetch campaigns", error);
-
       setRenderError(true);
       setRenderLoading(false);
     }
@@ -48,8 +46,6 @@ const TableCampaign = () => {
       window.dispatchEvent(new Event("refreshCampaign"));
       console.log(responseData);
     } catch (error) {
-      console.error(error);
-
       setMessage(setErrorMessage(error));
     }
   };
@@ -72,12 +68,16 @@ const TableCampaign = () => {
         navigate(`/dashboard/campaign/${id}`);
       },
     },
-    {
-      label: "Delete",
-      onClick: (id) => {
-        deleteHandler(id);
-      },
-    },
+    ...(userProfile.isAdmin
+      ? [
+          {
+            label: "Delete",
+            onClick: (id) => {
+              deleteHandler(id);
+            },
+          },
+        ]
+      : []),
   ];
   const buttonStyles = [
     "bg-blue-500", // Style untuk tombol View
@@ -85,7 +85,7 @@ const TableCampaign = () => {
   ];
 
   return (
-    <div className="p-20 overflow-y-auto">
+    <div className="p-20">
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold mb-4">Campaign data</h1>
         <Link to="/dashboard/campaign/create">

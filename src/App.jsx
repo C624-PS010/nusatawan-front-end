@@ -39,42 +39,40 @@ const App = () => {
           <a href="#maincontent" className="skip-link">
             Menuju ke konten
           </a>
-          <main id="maincontent">
-            <Routes>
-              {/* App Endpoint */}
-              <Route path="/" element={<AppLayout />}>
-                <Route index element={<Home />} />
-                <Route path="artikel" element={<ArtikelsPage />} />
-                <Route path="artikel/:id" element={<ArtikelDetails />} />
-                <Route path="campaign" element={<CampaignPage />} />
-                <Route path="campaign/:id" element={<CampaignDetails />} />
-                <Route path="tentang" element={<TentangPage />} />
-              </Route>
+          <Routes>
+            {/* App Endpoint */}
+            <Route path="/" element={<AppLayout />}>
+              <Route index element={<Home />} />
+              <Route path="artikel" element={<ArtikelsPage />} />
+              <Route path="artikel/:id" element={<ArtikelDetails />} />
+              <Route path="campaign" element={<CampaignPage />} />
+              <Route path="campaign/:id" element={<CampaignDetails />} />
+              <Route path="tentang" element={<TentangPage />} />
+            </Route>
 
-              {/* Auth endpoint */}
-              <Route path="/auth" element={<AuthLayout />}>
-                <Route index element={<Navigate to="/auth/login" />} />
-                <Route path="login" element={<LoginPage />} />
-                <Route path="register" element={<RegisterPage />} />
-              </Route>
+            {/* Auth endpoint */}
+            <Route path="/auth" element={<AuthLayout />}>
+              <Route index element={<Navigate to="/auth/login" />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
+            </Route>
 
-              {/* Dashboard endpoint */}
-              <Route path="/dashboard" element={<Auth />}>
-                <Route element={<DashboardLayout />}>
-                  <Route index element={<MainDashboard />} />
-                  <Route path="artikel" element={<TableArtikel />} />
-                  <Route path="artikel/:id" element={<ViewArtikel />} />
-                  <Route path="artikel/create" element={<CreateArtikel />} />
-                  <Route path="campaign" element={<TableCampaign />} />
-                  <Route path="campaign/:id" element={<ViewCampaign />} />
-                  <Route path="campaign/create" element={<CreateCampaign />} />
-                </Route>
+            {/* Dashboard endpoint */}
+            <Route path="/dashboard" element={<Auth />}>
+              <Route element={<DashboardLayout />}>
+                <Route index element={<MainDashboard />} />
+                <Route path="artikel" element={<TableArtikel />} />
+                <Route path="artikel/:id" element={<ViewArtikel />} />
+                <Route path="artikel/create" element={<CreateArtikel />} />
+                <Route path="campaign" element={<TableCampaign />} />
+                <Route path="campaign/:id" element={<ViewCampaign />} />
+                <Route path="campaign/create" element={<CreateCampaign />} />
               </Route>
+            </Route>
 
-              {/* Error endpoint */}
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
-          </main>
+            {/* Error endpoint */}
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
         </Suspense>
       </BrowserRouter>
     </>

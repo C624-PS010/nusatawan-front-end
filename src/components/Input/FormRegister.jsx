@@ -48,8 +48,6 @@ const FormRegister = () => {
 
       navigate("/");
     } catch (error) {
-      console.log(error);
-
       setLoading(false);
       setError(true);
 
@@ -58,18 +56,11 @@ const FormRegister = () => {
   };
 
   return (
-    <form
-      onSubmit={submitRegisterHandler}
-      className="flex flex-col gap-5 mt-10"
-    >
+    <form onSubmit={submitRegisterHandler} className="flex flex-col gap-5 mt-10">
       <InputForm type="text" placeholder="Username" name="username"></InputForm>
       <InputForm type="email" placeholder="Email" name="email"></InputForm>
       <InputForm type="tel" placeholder="No. Telepon" name="telepon" />
-      <InputForm
-        type="password"
-        placeholder="Kata Sandi"
-        name="password"
-      ></InputForm>
+      <InputForm type="password" placeholder="Kata Sandi" name="password"></InputForm>
       <InputForm
         type="password"
         placeholder="Konfirmasi Kata Sandi"

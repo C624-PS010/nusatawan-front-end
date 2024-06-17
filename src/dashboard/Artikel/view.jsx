@@ -31,10 +31,8 @@ const ViewArtikel = () => {
       setArticleData({ ...articleResponse.data });
       setArticleComments(articleCommentResponse.data);
       setRenderLoading(false);
-      console.log(articleResponse.data);
+      console.log(articleResponse);
     } catch (error) {
-      console.error("Failed to fetch articles: ", error);
-
       setMessage(setErrorMessage(error));
       setRenderLoading(false);
       setRenderError(true);
@@ -54,10 +52,29 @@ const ViewArtikel = () => {
       window.dispatchEvent(new Event("refreshArticle"));
       console.log(responseData);
     } catch (error) {
-      console.error(error);
-
       setMessage(setErrorMessage(error));
     }
+  };
+
+  const renderContent = (content) => {
+    return content.split("\n\n").map((paragraph, index) => {
+      // Replace custom tags with HTML tags
+      const formattedParagraph = paragraph
+        .replace(
+          /\[b\](.*?)\[\/b\]/g,
+          "<div style='font-weight: bold; font-size: 18px; padding-top: 20px; '>$1</div>"
+        )
+        .replace(/\[li\](.*?)\[\/li\]/g, "<li >$1</li>")
+        .replace(/\n/g, "<br />");
+
+      return (
+        <p
+          key={index}
+          className="text-justify"
+          dangerouslySetInnerHTML={{ __html: formattedParagraph }}
+        ></p>
+      );
+    });
   };
 
   const columns = ["Body", "User"];
@@ -126,26 +143,16 @@ const ViewArtikel = () => {
           <div>
             <ul className="pt-10">
               <li className="font-semibold">
-                Title :{" "}
-                <span className="font-normal"> {articleData.title} </span>
+                Title : <span className="font-normal"> {articleData.title} </span>
               </li>
               <li className="font-semibold">
-                Date :{" "}
-                <span className="font-normal">
-                  {" "}
-                  {convertDate(articleData.createdAt)}{" "}
-                </span>
+                Date : <span className="font-normal"> {convertDate(articleData.createdAt)} </span>
               </li>
               <li className="font-semibold">
-                Author :{" "}
-                <span className="font-normal">
-                  {" "}
-                  {articleData.user.username}{" "}
-                </span>
+                Author : <span className="font-normal"> {articleData.user.username} </span>
               </li>
               <li className="font-semibold">
-                Category :{" "}
-                <span className="font-normal"> {articleData.category} </span>
+                Category : <span className="font-normal"> {articleData.category} </span>
               </li>
             </ul>
           </div>
@@ -153,7 +160,7 @@ const ViewArtikel = () => {
         {/* Content */}
         <div className=" pt-10">
           <h1 className="text-lg font-bold">{articleData.title}</h1>
-          <p className="text-justify">{articleData.content}</p>
+          <p className="text-justify">{renderContent(articleData.content)}</p>
         </div>
       </div>
 
@@ -170,9 +177,7 @@ const ViewArtikel = () => {
         />
       )}
 
-      {message && (
-        <NeutralAlert message={message} setMessage={setMessage}></NeutralAlert>
-      )}
+      {message && <NeutralAlert message={message} setMessage={setMessage}></NeutralAlert>}
     </section>
   );
 };

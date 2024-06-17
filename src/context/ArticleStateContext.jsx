@@ -34,13 +34,10 @@ const ArticlesProvider = ({ children }) => {
       setIsError(false);
       setLoading(false);
       setMessage("Berhasil mendapatkan semua artikel");
-      console.log(response.data);
+      console.log(response);
     } catch (error) {
-      console.error("Failed to fetch articles", error);
-
       setIsError(true);
       setLoading(false);
-
       setMessage(setErrorMessage(error));
     }
   };
@@ -59,10 +56,8 @@ const ArticlesProvider = ({ children }) => {
       setIsError(false);
       setLoading(false);
       setMessage("Berhasil mendapatkan artikel");
-      console.log(response.data);
+      console.log(response);
     } catch (error) {
-      console.error(error);
-
       setIsError(true);
       setLoading(false);
 
@@ -81,9 +76,7 @@ const ArticlesProvider = ({ children }) => {
       console.log(searchQuery, filterQuery);
       const filtered = articles.filter((article) => {
         if (searchQuery && !filterQuery) {
-          return article.title
-            .toLowerCase()
-            .startsWith(searchQuery.toLowerCase());
+          return article.title.toLowerCase().startsWith(searchQuery.toLowerCase());
         } else if (!searchQuery && filterQuery) {
           return article.categoryName === filterQuery;
         } else {
@@ -101,18 +94,14 @@ const ArticlesProvider = ({ children }) => {
   useEffect(() => {
     window.addEventListener("renderAllArticles", fetchAllArticles);
     window.addEventListener("renderArticle", fetchArticle);
-    window.addEventListener("queryChange", () =>
-      filterArticles(allArticlesData)
-    );
+    window.addEventListener("queryChange", () => filterArticles(allArticlesData));
 
     fetchAllArticles();
 
     return () => {
       window.removeEventListener("renderAllArticles", fetchAllArticles);
       window.removeEventListener("renderArticle", fetchArticle);
-      window.addEventListener("queryChange", () =>
-        filterArticles(allArticlesData)
-      );
+      window.addEventListener("queryChange", () => filterArticles(allArticlesData));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -137,9 +126,7 @@ const ArticlesProvider = ({ children }) => {
 const useArticleState = () => {
   const context = useContext(ArticlesContext);
   if (context === undefined) {
-    throw new Error(
-      "useArticleState must be used within a ArticleStateProvider"
-    );
+    throw new Error("useArticleState must be used within a ArticleStateProvider");
   }
   return context;
 };

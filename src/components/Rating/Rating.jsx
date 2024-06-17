@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Articles from "../../network/Articles";
 import localUser from "../../utils/localUser";
 import Alert from "../Alert/Alert";
+import { setErrorMessage } from "../../utils/errorHandler";
 
 const Rating = (props) => {
   const { id } = props;
@@ -18,9 +19,9 @@ const Rating = (props) => {
       if (!response.data._avg.rating) setCurrentRating(1);
       else setCurrentRating(Math.floor(response.data._avg.rating));
 
-      console.log(response.data);
+      console.log(response);
     } catch (error) {
-      console.error("Failed to fetch rating", error);
+      console.error("Failed to fetch rating");
     }
   };
 
@@ -44,17 +45,9 @@ const Rating = (props) => {
       window.dispatchEvent(new Event("refreshRating"));
       console.log(responseData);
     } catch (error) {
-      console.log(error);
-
       setIsError(true);
 
-      if (error.data && error.status === 401) setMessage("User not logged in");
-      else if (error.data) setMessage(error.data.message);
-      else setMessage(error.message);
-
-      setTimeout(() => {
-        setMessage("");
-      }, 4000);
+      setMessage(setErrorMessage(error));
     }
   };
 

@@ -28,10 +28,8 @@ const ArtikelDetails = () => {
       setArticleData({ ...response.data });
 
       setLoading(false);
-      console.log(response.data);
+      console.log(response);
     } catch (error) {
-      console.error("Failed to fetch articles: ", error);
-
       setLoading(false);
       setIsError(true);
       setMessage(setErrorMessage(error));
@@ -94,7 +92,7 @@ const ArtikelDetails = () => {
   return (
     <>
       <div className="h-[85px] bg-gray-800 w-full"></div>
-      <div className="bg-slate px-20 py-10">
+      <div className="bg-slate md:px-20 md:py-10">
         <div className="h-[300px] overflow-hidden w-full">
           <LazyLoadImage
             src={`${config.baseUrl}/images/articles/${articleData.image}`}
@@ -102,10 +100,9 @@ const ArtikelDetails = () => {
             className="mx-auto h-[300px] w-full object-cover transition duration-700 hover:scale-110"
           />
         </div>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-10">
           <p className="text-slate-600 text-sm py-3">
-            Ditulis oleh {articleData.user?.username} pada{" "}
-            {convertDate(articleData.createdAt)}
+            Ditulis oleh {articleData.user?.username} pada {convertDate(articleData.createdAt)}
           </p>
           <div className="flex flex-col md:flex-row md:justify-between">
             {/* Title */}
@@ -128,9 +125,7 @@ const ArtikelDetails = () => {
 
         {/* Rating */}
         <div className="justify-center items-center text-center p-10">
-          <h1 className="text-2xl font-bold mb-4 text-tertiary">
-            Berikan Rating Anda
-          </h1>
+          <h1 className="text-2xl font-bold mb-4 text-tertiary">Berikan Rating Anda</h1>
           <Rating id={id} />
         </div>
 

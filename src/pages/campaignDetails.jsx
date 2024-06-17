@@ -25,10 +25,8 @@ const CampaignDetails = () => {
 
       setCampaignData({ ...response.data });
       setLoading(false);
-      console.log(response.data);
+      console.log(response);
     } catch (error) {
-      console.error("Failed to fetch articles: ", error);
-
       setLoading(false);
       setIsError(true);
       setMessage(setErrorMessage(error));
@@ -85,7 +83,7 @@ const CampaignDetails = () => {
   return (
     <>
       <div className="h-[85px] bg-gray-800 w-full"></div>
-      <div className="px-20 py-10">
+      <div className="md:px-20 md:py-10">
         <div className="h-[300px] overflow-hidden w-full">
           <LazyLoadImage
             src={`${config.baseUrl}/images/campaigns/${campaignData.image}`}
@@ -93,11 +91,10 @@ const CampaignDetails = () => {
             className="mx-auto h-[300px] w-full object-cover transition duration-700 hover:scale-110"
           />
         </div>
-        <div className="container ">
+        <div className="container pb-10 px-10">
           <p className="text-slate-600 text-sm py-3">
             {" "}
-            Ditulis oleh {campaignData.user.username} pada{" "}
-            {convertDate(campaignData.createdAt)}
+            Ditulis oleh {campaignData.user.username} pada {convertDate(campaignData.createdAt)}
           </p>
           <h1 className="text-3xl font-bold pb-10">{campaignData.title}</h1>
           <p className="text-justify">{renderContent(campaignData.content)}</p>

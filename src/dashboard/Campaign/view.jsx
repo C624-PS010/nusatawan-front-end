@@ -4,22 +4,54 @@ import Campaigns from "../../network/Campaigns";
 import config from "../../utils/config";
 import convertDate from "../../utils/dateConverter";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { setErrorMessage } from "../../utils/errorHandler";
+import LoadingSpin from "../../components/Loading/LoadingSpin";
 
 const ViewCampaign = () => {
   const { id } = useParams();
 
   const [campaignData, setCampaignData] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [renderLoading, setRenderLoading] = useState(true);
+  const [renderError, setRenderError] = useState(false);
+  const [message, setMessage] = useState("");
 
   const fetchCampaigns = async () => {
     try {
+      setRenderLoading(true);
+      setRenderError(false);
+      setMessage("false");
+
       const response = await Campaigns.getCampaignById(id);
+
       setCampaignData({ ...response.data });
-      setLoading(false);
+      setRenderLoading(false);
       console.log(response.data);
     } catch (error) {
-      console.error("Failed to fetch campaigns: ", error);
+      setRenderError(true);
+      setRenderLoading(false);
+      setMessage(setErrorMessage(error));
     }
+  };
+
+  const renderContent = (content) => {
+    return content.split("\n\n").map((paragraph, index) => {
+      // Replace custom tags with HTML tags
+      const formattedParagraph = paragraph
+        .replace(
+          /\[b\](.*?)\[\/b\]/g,
+          "<div style='font-weight: bold; font-size: 18px; padding-top: 20px; '>$1</div>"
+        )
+        .replace(/\[li\](.*?)\[\/li\]/g, "<li >$1</li>")
+        .replace(/\n/g, "<br />");
+
+      return (
+        <p
+          key={index}
+          className="text-justify"
+          dangerouslySetInnerHTML={{ __html: formattedParagraph }}
+        ></p>
+      );
+    });
   };
 
   useEffect(() => {
@@ -27,7 +59,13 @@ const ViewCampaign = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return <h1>Loading</h1>;
+  if (renderLoading)
+    return (
+      <div className="flex justify-center items-center h-screen w-full">
+        <LoadingSpin color="slate" size="10" />
+      </div>
+    );
+  if (renderError) return <h1>{message}</h1>;
 
   return (
     <section className="p-20 overflow-y-auto">
@@ -55,22 +93,13 @@ const ViewCampaign = () => {
           <div>
             <ul className="pt-10">
               <li className="font-semibold">
-                Title :{" "}
-                <span className="font-normal"> {campaignData.title} </span>
+                Title : <span className="font-normal"> {campaignData.title} </span>
               </li>
               <li className="font-semibold">
-                Date :{" "}
-                <span className="font-normal">
-                  {" "}
-                  {convertDate(campaignData.createdAt)}{" "}
-                </span>
+                Date : <span className="font-normal"> {convertDate(campaignData.createdAt)} </span>
               </li>
               <li className="font-semibold">
-                Author :{" "}
-                <span className="font-normal">
-                  {" "}
-                  {campaignData.user.username}{" "}
-                </span>
+                Author : <span className="font-normal"> {campaignData.user.username} </span>
               </li>
             </ul>
           </div>
@@ -78,7 +107,7 @@ const ViewCampaign = () => {
         {/* Content */}
         <div className=" pt-10">
           <h1 className="text-lg font-bold">{campaignData.title}</h1>
-          <p className="text-justify">{campaignData.content}</p>
+          <p className="text-justify">{renderContent(campaignData.content)}</p>
         </div>
       </div>
     </section>

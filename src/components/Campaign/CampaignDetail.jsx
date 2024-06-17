@@ -11,37 +11,32 @@ const CampaignDetail = () => {
   const [message, setMessage] = useState("");
   const skeleton = [1, 2, 3];
 
+  const fetchCampaigns = async () => {
+    try {
+      setMessage("");
+      setRenderError(false);
+      setRenderLoading(true);
+
+      const response = await Campaigns.getAllCampaigns();
+
+      setCampaignsData(response.data);
+      setRenderLoading(false);
+      console.log(response);
+    } catch (error) {
+      setRenderLoading(false);
+      setRenderError(true);
+      setMessage(setErrorMessage(error));
+    }
+  };
+
   useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        setMessage("");
-        setRenderError(false);
-        setRenderLoading(true);
-
-        const response = await Campaigns.getAllCampaigns();
-
-        setCampaignsData(response.data);
-        setRenderLoading(false);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Failed to fetch articles", error);
-
-        setRenderLoading(false);
-        setRenderError(true);
-        setMessage(setErrorMessage(error));
-      }
-    };
-
-    fetchArticles();
+    fetchCampaigns();
   }, []);
 
   return (
     <section data-aos="fade-up" className="container">
       <div className="container p-10 md:p-20 transform duration-500">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {campaignsData.map((item) => (
-            <CampaignCard key={item.id} {...item} />
-          ))}
           {renderLoading ? (
             skeleton.map((item) => <CampaignCardSkeleton key={item} />)
           ) : renderError ? (
@@ -49,9 +44,7 @@ const CampaignDetail = () => {
           ) : campaignsData.length === 0 ? (
             <h1 className="text-2xl font-bold">Tidak ada artikel</h1>
           ) : (
-            campaignsData.map((item) => (
-              <CampaignCard key={item.id} {...item} />
-            ))
+            campaignsData.map((item) => <CampaignCard key={item.id} {...item} />)
           )}
         </div>
       </div>

@@ -29,20 +29,16 @@ const FormLogin = () => {
       localUser.set(responseData.data);
 
       storeAuth(responseData.token.userToken);
-      if (responseData.token.adminToken)
-        storeAdminAuth(responseData.token.adminToken);
+      if (responseData.token.adminToken) storeAdminAuth(responseData.token.adminToken);
 
       setLoading(false);
       cleanInputField(event);
-      console.log("Login successful:", responseData);
-
       setError(false);
       setMessage("Login successful");
+      console.log(responseData);
 
       navigate("/");
     } catch (error) {
-      console.log(error);
-
       setLoading(false);
       setError(true);
       setMessage(setErrorMessage(error));
@@ -52,11 +48,7 @@ const FormLogin = () => {
   return (
     <form onSubmit={submitLoginHandler} className="flex flex-col gap-6 mt-10">
       <InputForm type="email" placeholder="Email" name="email"></InputForm>
-      <InputForm
-        type="password"
-        placeholder="Kata Sandi"
-        name="password"
-      ></InputForm>
+      <InputForm type="password" placeholder="Kata Sandi" name="password"></InputForm>
 
       <p className={`text-${error ? "red" : "green"}-500`}>{message}</p>
 

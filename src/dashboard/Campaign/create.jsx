@@ -5,6 +5,7 @@ import Campaigns from "../../network/Campaigns";
 import localUser from "../../utils/localUser";
 import Loading from "../../components/Loading/LoadingSpin";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { setErrorMessage } from "../../utils/errorHandler";
 
 // FORM UTAMA
 const CreateCampaign = () => {
@@ -57,13 +58,10 @@ const CreateCampaign = () => {
       setIsLoading(false);
       navigate("/dashboard/campaign");
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
       setIsError(true);
 
-      if (error.data && error.status === 401) setMessage("User not logged in");
-      else if (error.data) setMessage(error.data.message);
-      else setMessage(error.message);
+      setMessage(setErrorMessage(error));
     }
   };
 
@@ -86,9 +84,7 @@ const CreateCampaign = () => {
           className="bg-white p-5 border rounded-md shadow-md w-1/2"
         >
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Title
-            </label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
             <input
               type="text"
               name="title"
@@ -99,24 +95,19 @@ const CreateCampaign = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Content
-            </label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Content</label>
             <textarea
               name="content"
               value={formData.content}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              rows="10"
               placeholder="Enter the content"
             />
           </div>
           <ImageInput onImageSelect={handleImageSelect} />
           <div className="mt-4">
-            <p
-              className={`w-full text-${
-                isError ? "red" : "green"
-              }-500 mb-2 rounded p-1`}
-            >
+            <p className={`w-full text-${isError ? "red" : "green"}-500 mb-2 rounded p-1`}>
               {message}
             </p>
             <button
@@ -152,9 +143,7 @@ const ImageInput = ({ onImageSelect }) => {
 
   return (
     <div className="mt-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Upload Image
-      </label>
+      <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image</label>
       <div className="flex items-center justify-center">
         <label className="cursor-pointer">
           <span className="inline-block bg-gray-200 hover:bg-gray-300 rounded-md p-2">
@@ -168,12 +157,7 @@ const ImageInput = ({ onImageSelect }) => {
               <MdDriveFolderUpload className="w-12 h-12 text-gray-500" />
             )}
           </span>
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleImageChange}
-          />
+          <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
         </label>
       </div>
     </div>
