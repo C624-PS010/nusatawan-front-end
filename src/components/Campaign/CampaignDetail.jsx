@@ -36,7 +36,7 @@ const CampaignDetail = () => {
   return (
     <section data-aos="fade-up" className="container">
       <div className="container p-10 md:p-20 transform duration-500">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-10">
           {renderLoading ? (
             skeleton.map((item) => <CampaignCardSkeleton key={item} />)
           ) : renderError ? (
@@ -44,7 +44,9 @@ const CampaignDetail = () => {
           ) : campaignsData.length === 0 ? (
             <h1 className="text-2xl font-bold">Tidak ada artikel</h1>
           ) : (
-            campaignsData.map((item) => <CampaignCard key={item.id} {...item} />)
+            campaignsData.map((item) => (
+              <CampaignCard key={item.id} {...item} />
+            ))
           )}
         </div>
       </div>
