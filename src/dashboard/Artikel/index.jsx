@@ -28,7 +28,6 @@ const TableArtikel = () => {
       setRenderLoading(false);
       console.log(response);
     } catch (error) {
-      console.error("Failed to fetch articles", error);
       setRenderLoading(false);
       setRenderError(true);
       setMessage(setErrorMessage(error));
@@ -42,14 +41,12 @@ const TableArtikel = () => {
       if (!userProfile) throw new Error("User not logged in");
       else if (!userProfile.isAdmin) throw new Error("User is not admin");
 
-      const responseData = await Articles.deleteArticleById(id);
+      const response = await Articles.deleteArticleById(id);
 
       setMessage("Data deleted");
+      console.log(response);
       window.dispatchEvent(new Event("refreshArticle"));
-      console.log(responseData);
     } catch (error) {
-      console.error(error);
-
       setMessage(setErrorMessage(error));
     }
   };
@@ -89,7 +86,7 @@ const TableArtikel = () => {
   ];
 
   return (
-    <div className="p-20 overflow-y-auto">
+    <div className="p-20">
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold mb-4">Article Data</h1>
         <Link to="/dashboard/artikel/create">

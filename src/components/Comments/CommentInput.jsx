@@ -24,22 +24,16 @@ const CommentInput = (props) => {
 
       const comment = event.target.commentInput.value;
       const userId = localUserData.id;
-      const responseData = await Articles.addComment(
-        articleId,
-        userId,
-        comment
-      );
+      const responseData = await Articles.addComment(articleId, userId, comment);
 
       setLoading(false);
       setIsError(false);
       setMessage("Berhasil mengirim komentar");
 
+      console.log(responseData);
       event.target.commentInput.value = "";
       window.dispatchEvent(new Event("refreshArticle"));
-      console.log(responseData);
     } catch (error) {
-      console.log(error);
-
       setLoading(false);
       setIsError(true);
 
@@ -49,10 +43,7 @@ const CommentInput = (props) => {
 
   return (
     <>
-      <form
-        onSubmit={submitCommentHandler}
-        className="flex flex-col gap-3 px-5 pb-10 md:px-20"
-      >
+      <form onSubmit={submitCommentHandler} className="flex flex-col gap-3 px-5 pb-10 md:px-20">
         <h1 className="my-5  text-3xl font-bold text-tertiary">Komentar</h1>
         <div className="relative" data-twe-input-wrapper-init>
           <textarea

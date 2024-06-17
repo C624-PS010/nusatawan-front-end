@@ -5,6 +5,7 @@ import Articles from "../../network/Articles";
 import localUser from "../../utils/localUser";
 import LoadingSpin from "../../components/Loading/LoadingSpin";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { setErrorMessage } from "../../utils/errorHandler";
 
 // FORM UTAMA
 const CreateArtikel = () => {
@@ -46,7 +47,7 @@ const CreateArtikel = () => {
       const { title, content, location, categoryName, image } = formData;
       const userId = localUserData.id;
 
-      const responseData = await Articles.addArticle({
+      const response = await Articles.addArticle({
         title,
         content,
         location,
@@ -55,19 +56,16 @@ const CreateArtikel = () => {
         userId,
       });
 
-      console.log(responseData);
       setIsError(false);
       setMessage("Berhasil membuat artikel");
       setIsLoading(false);
+      console.log(response);
       navigate("/dashboard/artikel");
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
       setIsError(true);
 
-      if (error.data && error.status === 401) setMessage("User not logged in");
-      else if (error.data) setMessage(error.data.message);
-      else setMessage(error.message);
+      setMessage(setErrorMessage(error));
     }
   };
 
@@ -90,9 +88,7 @@ const CreateArtikel = () => {
           className="bg-white p-5 border rounded-md shadow-md w-1/2"
         >
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Title
-            </label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
             <input
               type="text"
               name="title"
@@ -103,21 +99,18 @@ const CreateArtikel = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Content
-            </label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Content</label>
             <textarea
               name="content"
               value={formData.content}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              rows="10"
               placeholder="Enter the content"
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Location
-            </label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Location</label>
             <input
               type="text"
               name="location"
@@ -128,9 +121,7 @@ const CreateArtikel = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Category
-            </label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Category</label>
             <select
               name="categoryName"
               value={formData.categoryName}
@@ -149,11 +140,7 @@ const CreateArtikel = () => {
           </div>
           <ImageInput onImageSelect={handleImageSelect} />
           <div className="mt-4">
-            <p
-              className={`w-full text-${
-                isError ? "red" : "green"
-              }-500 mb-2 rounded p-1`}
-            >
+            <p className={`w-full text-${isError ? "red" : "green"}-500 mb-2 rounded p-1`}>
               {message}
             </p>
             <button
@@ -189,9 +176,7 @@ const ImageInput = ({ onImageSelect }) => {
 
   return (
     <div className="mt-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Upload Image
-      </label>
+      <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image</label>
       <div className="flex items-center justify-center">
         <label className="cursor-pointer">
           <span className="inline-block bg-gray-200 hover:bg-gray-300 rounded-md p-2">
@@ -205,26 +190,13 @@ const ImageInput = ({ onImageSelect }) => {
               <MdDriveFolderUpload className="w-12 h-12 text-gray-500" />
             )}
           </span>
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleImageChange}
-          />
+          <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
         </label>
       </div>
     </div>
   );
 };
 
-const categoryList = [
-  "ekowisata",
-  "gunung",
-  "laut",
-  "pantai",
-  "religi",
-  "sejarah",
-  "seni",
-];
+const categoryList = ["ekowisata", "gunung", "laut", "pantai", "religi", "sejarah", "seni"];
 
 export default CreateArtikel;
