@@ -51,15 +51,15 @@ const SearchBar = () => {
           value={searchQuery}
           onChange={searchChangeHandler}
           placeholder="Cari Wisata..."
-          className="py-3 pl-20 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+          className="py-3 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
         />
-        <FaSearch className="absolute left-3 top-2.5 text-gray-400" />
+        <FaSearch className="absolute left-3 top-4  text-gray-400" />
       </div>
       <div className="relative w-full md:w-auto">
         <select
           value={filterQuery}
           onChange={filterChangeHandler}
-          className="px-4 py-3 pl-20 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+          className="px-4 py-3 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
         >
           <option value="" selected>
             Semua kategori
@@ -70,20 +70,12 @@ const SearchBar = () => {
             </option>
           ))}
         </select>
-        <MdCategory className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+        <MdCategory className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
       </div>
     </div>
   );
 };
 
-const categoryList = [
-  "ekowisata",
-  "gunung",
-  "laut",
-  "pantai",
-  "religi",
-  "sejarah",
-  "seni",
-];
+const categoryList = ["ekowisata", "gunung", "laut", "pantai", "religi", "sejarah", "seni"];
 
 export default SearchBar;
