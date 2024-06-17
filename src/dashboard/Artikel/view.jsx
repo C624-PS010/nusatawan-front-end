@@ -118,7 +118,7 @@ const ViewArtikel = () => {
   if (renderError) return <h1>{message}</h1>;
 
   return (
-    <section className="p-20 overflow-y-auto">
+    <section className="p-5 md:p-20">
       <div className="flex justify-between mb-4">
         <h1 className="text-3xl font-bold">Detail Artikel</h1>
         <Link to="/dashboard/artikel">

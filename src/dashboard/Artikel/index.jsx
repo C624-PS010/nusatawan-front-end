@@ -86,7 +86,7 @@ const TableArtikel = () => {
   ];
 
   return (
-    <div className="p-20">
+    <div className="p-5 md:p-20">
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold mb-4">Article Data</h1>
         <Link to="/dashboard/artikel/create">

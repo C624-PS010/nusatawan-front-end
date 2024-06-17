@@ -2,13 +2,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
-// import { BiSolidCategory } from "react-icons/bi";
 import { MdArticle, MdCampaign } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 
-const Sidebar = () => {
+const Sidebar = ({ displaySidebar }) => {
   return (
-    <div className=" bg-tertiary text-white flex flex-col">
+    <div className={`bg-tertiary text-white flex flex-col ${displaySidebar ? "hidden" : ""}`}>
       <div className="flex items-center justify-center h-20 border-b border-white">
         <h1 className="text-2xl font-bold pl-2">Nusatawan</h1>
       </div>
