@@ -17,12 +17,8 @@ const ResponsiveMenu = ({ showMenu, setShowMenu, logoutHandler }) => {
         <div className="flex items-center justify-start gap-3">
           <FaUserCircle size={50} />
           <div>
-            <h1 className="font-semibold">
-              Hello {userProfile ? userProfile.username : "There"}!
-            </h1>
-            <h1 className="text-sm text-slate-500">
-              {isLoggedIn ? "Logged in" : "Guest user"}
-            </h1>
+            <h1 className="font-semibold">Hello {userProfile ? userProfile.username : "There"}!</h1>
+            <h1 className="text-sm text-slate-500">{isLoggedIn ? "Logged in" : "Guest user"}</h1>
           </div>
         </div>
         <nav className="mt-12">
@@ -42,15 +38,13 @@ const ResponsiveMenu = ({ showMenu, setShowMenu, logoutHandler }) => {
             {/* To login */}
             {!isLoggedIn && (
               <Link to="auth/login">
-                <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">
-                  Login
-                </Button>
+                <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">Login</Button>
               </Link>
             )}
 
             {/* Logout button */}
             {isLoggedIn && (
-              <>
+              <div className="flex flex-wrap gap-5">
                 <Link to="/dashboard">
                   <Button classname="bg-primary hover:bg-tertiary rounded-full w-full">
                     Dashboard
@@ -62,7 +56,7 @@ const ResponsiveMenu = ({ showMenu, setShowMenu, logoutHandler }) => {
                 >
                   Keluar
                 </Button>
-              </>
+              </div>
             )}
           </ul>
         </nav>

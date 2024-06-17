@@ -70,23 +70,20 @@ const CreateArtikel = () => {
   };
 
   return (
-    <div className="overflow-y-auto">
-      <div className="flex justify-between px-20 pt-6">
-        <h1 className="text-3xl font-bold mb-4">Create Article</h1>
+    <div className="p-5 md:p-20">
+      <div className="flex justify-between mb-5 md:px-20">
+        <h1 className="text-3xl font-bold">Create Article</h1>
         <Link to="/dashboard/artikel">
           <button
             type="submit"
-            className="font-semibold text-white border bg-red-600  border-red-600 hover:bg-red-500 rounded-lg text-md px-14 py-2.5 mt-5 text-center me-2 mb-2 "
+            className="font-semibold text-white border bg-red-600  border-red-600 hover:bg-red-500 rounded-lg text-md px-10 py-2 text-center"
           >
             Back
           </button>
         </Link>
       </div>
-      <section className="flex justify-center pb-10">
-        <form
-          onSubmit={articleSubmitHandler}
-          className="bg-white p-5 border rounded-md shadow-md w-1/2"
-        >
+      <section className="md:px-20 lg:px-40">
+        <form onSubmit={articleSubmitHandler} className="bg-white p-5 border rounded-md shadow-md">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
             <input
