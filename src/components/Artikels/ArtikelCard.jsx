@@ -46,13 +46,15 @@ const ArtikelCard = ({
             dangerouslySetInnerHTML={{ __html: renderContent(content) }}
           ></p>
         </div>
-        <div className="inline-block bg-slate-300 rounded p-1 w-20">
-          <p
-            className="line-clamp-1 text-slate-700 text-sm px-2 text-center"
-            style={{ textTransform: "capitalize" }}
-          >
-            {category}
-          </p>
+        <div className="flex justify-start">
+          <span className="inline-block bg-slate-300 rounded p-1">
+            <p
+              className="line-clamp-1 text-slate-700 text-sm text-center px-2"
+              style={{ textTransform: "capitalize" }}
+            >
+              {category}
+            </p>
+          </span>
         </div>
       </div>
     </Link>
