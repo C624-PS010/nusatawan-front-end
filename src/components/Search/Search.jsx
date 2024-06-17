@@ -44,8 +44,8 @@ const SearchBar = () => {
   }, [searchQuery, filterQuery, allArticlesData]);
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center bg-slate-200 bg-opacity-10 p-4 rounded-md shadow-xl w-auto lg:w-full max-w-3xl">
-      <div className="relative w-full pb-2 md:w-auto lg:pr-48">
+    <div className="flex flex-col md:flex-row justify-between items-center bg-slate-200 bg-opacity-40 p-4 rounded-md shadow-xl w-auto lg:w-full max-w-3xl gap-5">
+      <div className="relative w-full  md:w-auto lg:pr-48">
         <input
           type="search"
           value={searchQuery}

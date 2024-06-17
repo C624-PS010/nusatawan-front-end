@@ -11,7 +11,7 @@ const ArtikelDetail = () => {
       <h1 className=" my-8 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold">
         Artikel Kami
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-5">
         {loading ? (
           skeleton.map((item) => <ArtikelCardSkeleton key={item} />)
         ) : isError ? (
