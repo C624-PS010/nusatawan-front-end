@@ -51,7 +51,7 @@ const FormRegister = () => {
       setLoading(false);
       setError(true);
 
-      setMessage(setErrorMessage());
+      setMessage(setErrorMessage(error));
     }
   };
 
